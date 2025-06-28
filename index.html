@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Praktisi Phone Blora - Aplikasi Android Terlengkap</title>
+    <title>Praktisi Phone Blora - Aplikasi Android & Tools Teknisi</title>
     
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Lengkap dengan fitur baru) -->
+    <!-- CSS (Lengkap dengan fitur baru & gaya kartu aplikasi) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -51,14 +51,40 @@
         .filter-buttons button { padding: 10px 20px; border: none; border-radius: 50px; background-color: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: 600; transition: background-color 0.3s, color 0.3s;}
         .filter-buttons button.active { background-color: var(--primary-color); color: white; }
 
-        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .app-card { background-color: var(--card-bg); border-radius: 15px; box-shadow: 0 4px 20px var(--shadow-color); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; overflow: hidden; }
         .app-card.hide { display: none; }
         .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
-        .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
-        .app-card img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; align-self: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.5s; background-color: #e9ecef;}
-        body.dark-mode .app-card img { background-color: #3a3b3c; }
-        .app-card img.loaded { opacity: 1; }
+        
+        /* === CSS BARU UNTUK KARTU DENGAN GAMBAR === */
+        .card-header-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center top;
+        }
+        .card-content {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-icon {
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 20px;
+            margin-top: -50px; /* Tarik ikon ke atas */
+            margin-bottom: 1rem;
+            border: 4px solid var(--card-bg);
+            background-color: var(--card-bg) !important;
+            align-self: center;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .card-icon.loaded { opacity: 1; }
+        /* ========================================= */
+
         .app-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
         .app-card p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem; flex-grow: 1; }
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
@@ -103,7 +129,7 @@
 
     <main>
         <section class="hero">
-            <h1>Aplikasi Android Pilihan dari Praktisi Phone Blora</h1>
+            <h1>Aplikasi Android & Tools Teknisi dari Praktisi Phone Blora</h1>
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
         
@@ -123,16 +149,17 @@
 
             <div class="app-grid">
                 
-                <!-- === KARTU APLIKASI ANDA: TOOL MTK FREE (SUDAH DIIMPLEMENTASIKAN) === -->
+                <!-- === KARTU APLIKASI ANDA: PRAKTISI FLASH PRO (SUDAH DIPERBARUI) === -->
                 <div class="app-card" data-category="utilitas">
+                    <div class="card-header-image" style="background-image: url('images/praktisi-flash-pro.png');">
+                    </div>
                     <div class="card-content">
-                        <!-- Saya memilih ikon 'microchip' yang sangat relevan dengan MediaTek -->
-                        <img data-src="https://image.flaticon.com/icons/svg/1376/1376307.svg" alt="Ikon Tool MTK" class="lazy">
-                        <h3>Tool MTK Free</h3>
-                        <p>Aplikasi khusus untuk teknisi. Alat bantu serbaguna untuk menangani perangkat dengan chipset MediaTek (MTK).</p>
+                        <img data-src="https://cdn-icons-png.flaticon.com/512/2329/2329063.png" alt="Ikon Chipset" class="lazy card-icon">
+                        <h3>Praktisi Flash Pro</h3>
+                        <p>Tool All-in-One untuk teknisi ponsel. Mendukung fungsi MTK Client, Bypass, ADB, dan Fastboot untuk berbagai kebutuhan servis.</p>
                         <div class="app-info">
-                            <span><i class="fas fa-file-archive"></i> ~5 MB</span> <!-- Perkiraan ukuran, ganti jika perlu -->
-                            <span><i class="fas fa-code-branch"></i> 1.0</span> <!-- Ganti dengan versi aplikasi Anda -->
+                            <span><i class="fas fa-file-archive"></i> ~5 MB</span>
+                            <span><i class="fas fa-code-branch"></i> 2.0.1</span>
                         </div>
                         <a href="https://drive.google.com/uc?export=download&id=1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
@@ -142,8 +169,9 @@
                 <!-- ======================================================================= -->
 
                 <div class="app-card" data-category="utilitas">
+                    <div class="card-header-image" style="background-image: url('https://via.placeholder.com/600x320/4CAF50/FFFFFF?text=Pembersih+Pro');"></div>
                     <div class="card-content">
-                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=P" alt="Ikon Pembersih Pro" class="lazy">
+                        <img data-src="https://cdn-icons-png.flaticon.com/512/2907/2907923.png" alt="Ikon Pembersih Pro" class="lazy card-icon">
                         <h3>Pembersih Pro</h3>
                         <p>Optimalkan kinerja HP Anda dengan satu kali klik. Hapus cache dan file sampah.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 15 MB</span><span><i class="fas fa-code-branch"></i> 2.1.0</span></div>
@@ -152,8 +180,9 @@
                 </div>
 
                 <div class="app-card" data-category="personalisasi">
+                    <div class="card-header-image" style="background-image: url('https://via.placeholder.com/600x320/2196F3/FFFFFF?text=WallArt+HD');"></div>
                     <div class="card-content">
-                        <img data-src="https://via.placeholder.com/80/2196F3/FFFFFF?text=W" alt="Ikon WallArt HD" class="lazy">
+                        <img data-src="https://cdn-icons-png.flaticon.com/512/1041/1041859.png" alt="Ikon WallArt HD" class="lazy card-icon">
                         <h3>WallArt HD</h3>
                         <p>Ribuan wallpaper berkualitas tinggi untuk membuat tampilan HP lebih menarik.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
@@ -162,8 +191,9 @@
                 </div>
 
                 <div class="app-card" data-category="produktivitas">
+                     <div class="card-header-image" style="background-image: url('https://via.placeholder.com/600x320/FF9800/FFFFFF?text=NoteQuick');"></div>
                     <div class="card-content">
-                        <img data-src="https://via.placeholder.com/80/FF9800/FFFFFF?text=N" alt="Ikon NoteQuick" class="lazy">
+                        <img data-src="https://cdn-icons-png.flaticon.com/512/3342/3342137.png" alt="Ikon NoteQuick" class="lazy card-icon">
                         <h3>NoteQuick</h3>
                         <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 10 MB</span><span><i class="fas fa-code-branch"></i> 3.0.1</span></div>
@@ -223,32 +253,20 @@
                 localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
             });
             const sliderSpan = document.querySelector('.slider');
-            sliderSpan.style.setProperty('position', 'absolute');
-            sliderSpan.style.setProperty('content', '""');
-            sliderSpan.style.setProperty('height', '20px');
-            sliderSpan.style.setProperty('width', '20px');
-            sliderSpan.style.setProperty('left', '4px');
-            sliderSpan.style.setProperty('bottom', '4px');
-            sliderSpan.style.setProperty('transition', '.4s');
             const sliderBefore = document.createElement('span');
-            sliderBefore.style.setProperty('position', 'absolute');
-            sliderBefore.style.setProperty('content', '""');
-            sliderBefore.style.setProperty('height', '20px');
-            sliderBefore.style.setProperty('width', '20px');
-            sliderBefore.style.setProperty('left', '4px');
-            sliderBefore.style.setProperty('bottom', '4px');
-            sliderBefore.style.setProperty('background-color', 'white');
-            sliderBefore.style.setProperty('transition', '.4s');
-            sliderBefore.style.setProperty('border-radius', '50%');
+            sliderBefore.style.cssText = 'position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;';
             sliderSpan.appendChild(sliderBefore);
-            darkModeToggle.addEventListener('change', () => {
+            function updateSlider() {
                 if (darkModeToggle.checked) {
                     sliderBefore.style.transform = 'translateX(22px)';
+                    sliderSpan.style.backgroundColor = 'var(--primary-color)';
                 } else {
                     sliderBefore.style.transform = 'translateX(0)';
+                    sliderSpan.style.backgroundColor = '#ccc';
                 }
-            });
-            if (darkModeToggle.checked) sliderBefore.style.transform = 'translateX(22px)';
+            }
+            darkModeToggle.addEventListener('change', updateSlider);
+            updateSlider();
 
 
             // FAQ Accordion
@@ -260,7 +278,7 @@
             });
 
             // Lazy Loading Images
-            const lazyImages = document.querySelectorAll('img.lazy');
+            const lazyImages = document.querySelectorAll('img.card-icon');
             const lazyImageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -286,7 +304,7 @@
                     const cardCategory = card.dataset.category;
                     const cardTitle = card.querySelector('h3').textContent.toLowerCase();
                     
-                    const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+                    const categoryMatch = (selectedCategory === 'all' || cardCategory === selected-category);
                     const searchMatch = cardTitle.includes(searchTerm);
 
                     if (categoryMatch && searchMatch) {
