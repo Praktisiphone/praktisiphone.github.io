@@ -11,12 +11,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Kode AdSense Utama - DITEMPATKAN DI SINI (di dalam <head>, sebelum </head>) -->
-    <!-- Ini hanya perlu satu kali per halaman. Tetap di sini. -->
+    <!-- Kode AdSense Utama -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
      crossorigin="anonymous"></script>
 
-    <!-- CSS (Lengkap dengan fitur baru termasuk modal, styling iklan, dan ikon generate) -->
+    <!-- Kode Google Analytics (Global Site Tag) - DITEMPATKAN DI SINI -->
+    <!-- Menggunakan kode yang Anda berikan -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZ7QVX3CPR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EZ7QVX3CPR');
+    </script>
+    <!-- Akhir Kode Google Analytics -->
+
+
+    <!-- CSS (Lengkap dengan fitur baru termasuk modal dan styling iklan) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -461,7 +474,7 @@
 
             <!-- RUANG IKLAN DI MODAL - KOSONG UNTUK SAAT INI KARENA DELAY 0 DETIK -->
             <!-- Kode Unit Iklan AdSense telah dipindahkan ke lokasi lain. -->
-            <!-- Jika nanti Anda ingin menambah delay untuk menampilkan iklan, tempelkan kode unit iklan AdSense di dalam div ini. -->
+            <!-- Jika nanti Anda ingin menambah delay & iklan di modal, tempelkan kode unit iklan AdSense di dalam div ini. -->
             <div class="ads-container modal-ads-space" style="border: none; background: none; padding: 0; min-height: auto;">
                  <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem;">(Ruang iklan di modal tidak aktif dengan delay 0)</p>
             </div>
@@ -640,7 +653,7 @@
              }, 2000);
         }
 
-        // === Download Modal Logic (Revised for Instant Download & No Modal Ad) ===
+        // === Download Modal Logic (Instant Download) ===
         const downloadModalOverlay = document.getElementById('downloadModalOverlay');
         const downloadButtons = document.querySelectorAll('.download-btn');
         let downloadTimer = null;
@@ -659,8 +672,7 @@
                 // 1. Tampilkan modal (akan berkedip sangat cepat karena delay 0)
                 downloadModalOverlay.classList.add('show');
 
-                // **TIDAK ADA PUSH ADSENSE DI DALAM MODAL KARENA KODE IKLAN SUDAH DIPINDAH**
-                console.log("Modal shown with 0 delay. No AdSense push in modal.");
+                // **TIDAK ADA PUSH ADSENSE DI DALAM MODAL**
 
 
                 // 2. Set timer untuk memulai download dengan **delay sangat singkat (0ms)**
@@ -682,30 +694,50 @@
                     downloadTimer = null;
 
                 }, delayBeforeDownload);
+
+                // === Tambahkan Google Analytics Event Tracking di sini ===
+                // Event ini dikirim segera setelah tombol diklik (sebelum modal hilang)
+                if (typeof gtag === 'function') { // Pastikan gtag function tersedia
+                     gtag('event', 'click', {
+                         'event_category': 'Download Button',
+                         'event_label': button.closest('.app-card').querySelector('h3').textContent, // Nama Aplikasi
+                         'value': 1
+                     });
+                     console.log(`Google Analytics event sent: Download Button - ${button.closest('.app-card').querySelector('h3').textContent}`);
+                } else {
+                    console.warn("gtag function not available. Google Analytics event not sent.");
+                }
+                // =======================================================
             });
         });
 
 
-        // === Inisialisasi Unit Iklan Lain di Luar Modal ===
+        // === Inisialisasi Unit Iklan AdSense ===
         // Ini membantu AdSense memuat unit iklan yang sudah terlihat saat halaman dimuat.
-        // Ini tetap aktif untuk unit iklan yang Anda tempatkan di luar modal.
+        // Termasuk unit iklan yang Anda tempatkan di luar modal.
+        // PENTING: push() juga dipanggil di event click download di atas untuk event GA.
+        // Namun, AdSense unit push() biasanya hanya perlu dipanggil sekali
+        // ketika elemen <ins> pertama kali muncul di DOM dan terlihat.
+        // Karena kita sudah menempatkan unit iklan di luar modal secara permanen,
+        // panggil push() saat DOMContentLoaded untuk unit di luar modal.
+        // Jika ada unit yang awalnya hidden (misalnya di tab filter),
+        // AdSense Auto Ads atau push manual saat elemen jadi terlihat mungkin diperlukan.
+        // Untuk unit di modal (yang sekarang kosong), tidak perlu push() di sini atau di click event.
+
          if (typeof adsbygoogle !== 'undefined') {
-             console.log("Initial AdSense push for units outside modal.");
+             console.log("Initial AdSense push for all units on page load.");
              // Mengambil semua unit iklan dengan class .adsbygoogle
+             // Tidak perlu filter jika modal sekarang tidak punya unit iklan di dalamnya
              document.querySelectorAll('.adsbygoogle').forEach(adIns => {
-                  // Cek apakah unit ini ada di dalam modal, jika ya, jangan di-push di sini
-                  // (Karena kita sudah tidak menempatkan kode di modal, filter ini opsional tapi bagus)
-                  if (!adIns.closest('#downloadModalOverlay')) {
-                      try {
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                         // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
-                      } catch (e) {
-                          console.error("Error pushing AdSense ad:", adIns.getAttribute('data-ad-slot'), e);
-                      }
+                  try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
+                  } catch (e) {
+                      console.error("Error pushing AdSense ad:", adIns.getAttribute('data-ad-slot'), e);
                   }
              });
          } else {
-             console.warn("adsbygoogle is not defined on load. Initial ads might not load.");
+             console.warn("adsbygoogle is not defined on load. Ads might not load.");
          }
 
 
