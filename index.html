@@ -12,14 +12,14 @@
     <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Lengkap dengan fitur baru) -->
+    <!-- CSS (Hanya mode terang permanen) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
             --bg-color: #f0f2f5; --card-bg: #ffffff; --text-color: #1c1e21; --text-secondary: #65676b;
             --border-color: #dddfe2; --shadow-color: rgba(0, 0, 0, 0.1); --font-family: 'Poppins', sans-serif;
         }
-        /* Aturan dark mode tetap ada, tapi tidak akan diterapkan karena toggle dan JS logic dihapus */
+        /* Aturan dark mode tetap ada di CSS tapi tidak akan diterapkan */
         body.dark-mode {
             --bg-color: #18191a; --card-bg: #242526; --text-color: #e4e6eb; --text-secondary: #b0b3b8;
             --border-color: #3a3b3c; --shadow-color: rgba(0, 0, 0, 0.3);
@@ -99,46 +99,8 @@
         .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
         .toast-notification.show { opacity: 1; bottom: 40px; }
 
-        /* CSS for Dark Mode Toggle Slider (Aturan ini tetap ada tapi elemen toggle dihapus) */
-        body .switch .slider {
-           position: absolute;
-           cursor: pointer;
-           top: 0;
-           left: 0;
-           right: 0;
-           bottom: 0;
-           background-color: #ccc;
-           -webkit-transition: .4s;
-           transition: .4s;
-           border-radius: 34px;
-        }
-
-        body .switch .slider:before {
-           position: absolute;
-           content: "";
-           height: 20px;
-           width: 20px;
-           left: 4px;
-           bottom: 4px;
-           background-color: white;
-           -webkit-transition: .4s;
-           transition: .4s;
-           border-radius: 50%;
-        }
-
-        body .switch input:checked + .slider {
-           background-color: var(--primary-color);
-        }
-
-        body .switch input:focus + .slider {
-           box-shadow: 0 0 1px var(--primary-color);
-        }
-
-        body .switch input:checked + .slider:before {
-           -webkit-transform: translateX(22px);
-           -ms-transform: translateX(22px);
-           transform: translateX(22px);
-        }
+        /* CSS for Dark Mode Toggle Slider (Dihapus elemennya, jadi aturan ini tidak relevan) */
+        /* ... aturan slider sebelumnya ... */
 
     </style>
 </head>
@@ -148,10 +110,6 @@
         <nav>
             <div class="logo">PRAKTISI<strong>PHONE</strong></div>
             <!-- Tombol Dark Mode Dihapus -->
-            <!-- <label class="switch">
-                <input type="checkbox" id="darkModeToggle">
-                <span class="slider"></span>
-            </label> -->
         </nav>
     </header>
 
@@ -206,13 +164,15 @@
                 </div>
                  <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE === -->
-                <div class="app-card" data-category="utilitas">
+                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE (EDITED - KASIR CUCIAN) === -->
+                <div class="app-card" data-category="produktivitas"> <!-- Mengubah kategori ke produktivitas -->
                     <div class="card-content">
-                         <i class="fas fa-soap"></i>
-                        <h3>aplikasi cucian.exe</h3>
-                        <p>Membersihkan file-file 'kotor' dan 'tidak perlu' di perangkat Anda. Lakukan pembersihan berkala untuk performa optimal.</p>
+                         <i class="fas fa-soap"></i> <!-- Ikon tetap sama sesuai permintaan -->
+                        <h3>aplikasi cucian.exe</h3> <!-- Judul tetap sama sesuai permintaan -->
+                        <!-- Keterangan diubah sesuai fungsi aplikasi kasir -->
+                        <p>Aplikasi kasir praktis untuk UMKM cuci motor/mobil. Catat transaksi dengan cepat dan kelola pendapatan usaha Anda.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
+                        <!-- Link unduh tetap sama -->
                         <a href="https://drive.google.com/uc?export=download&id=1DglY2oTA_B1uT4HbehCEoOjWwYkuP3Y2" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
                         </a>
@@ -269,30 +229,12 @@
         <p>© 2024 PRAKTISI PHONE BLORA - Didukung oleh Teknologi Terkini.</p>
     </footer>
 
-    <!-- JavaScript (Lengkap dengan fitur baru) -->
+    <!-- JavaScript (Hanya mode terang permanen) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Logika Dark Mode Dihapus ---
-            // const darkModeToggle = document.getElementById('darkModeToggle'); // Dihapus karena elemennya dihapus
+            // Logika Dark Mode Dihapus untuk permanen mode terang
             const body = document.body;
-
-            // Bagian load preference & toggle event listener dihapus
-            /*
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                body.classList.add('dark-mode');
-                // darkModeToggle.checked = true; // Dihapus
-            }
-            // darkModeToggle.addEventListener('change', () => { // Dihapus
-            //     body.classList.toggle('dark-mode');
-            //     if (body.classList.contains('dark-mode')) {
-            //         localStorage.setItem('darkMode', 'enabled');
-            //     } else {
-            //         localStorage.setItem('darkMode', 'disabled');
-            //     }
-            // });
-            */
-            // --- End of Dark Mode Logic ---
-
+            // Semua kode terkait dark mode toggle di sini sudah dihapus.
 
             // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
@@ -396,13 +338,7 @@
              }, 2000); // Hide after 2 seconds
         }
 
-        // Adjust CSS for the slider before element based on initial state (Kode ini tidak lagi diperlukan karena elemen toggle dihapus, tapi dibiarkan agar tidak merusak struktur script)
-        document.addEventListener('DOMContentLoaded', () => {
-             // const darkModeToggle = document.getElementById('darkModeToggle'); // Dihapus
-             // const slider = document.querySelector('.switch .slider'); // Dihapus
-             // Logic di sini tidak perlu dijalankan lagi
-        });
-
+        // Kode JavaScript terkait Dark Mode Toggle Slider sudah dihapus
 
     </script>
 </body>
