@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Kode AdSense Utama - DITEMPATKAN DI SINI (di dalam <head>, sebelum </head>) -->
-    <!-- Ini hanya perlu satu kali per halaman -->
+    <!-- Ini hanya perlu satu kali per halaman. Tetap di sini. -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
      crossorigin="anonymous"></script>
 
@@ -168,7 +168,7 @@
             width: 90%; /* Make it responsive */
             box-shadow: 0 5px 15px var(--shadow-color);
             transform: scale(0.9); /* Start slightly smaller */
-            transition: transform 0.3s ease-out;
+            transition: transform 0.1s ease-out; /* Transisi cepat */
         }
 
          .download-modal-overlay.show .download-modal-content {
@@ -420,35 +420,25 @@
 
     <div id="toast" class="toast-notification">Nomor berhasil disalin!</div>
 
-    <!-- === Struktur Modal Download (Untuk Menampilkan Iklan Sebelum Download) === -->
+    <!-- === Struktur Modal Download === -->
     <div id="downloadModalOverlay" class="download-modal-overlay">
         <div class="download-modal-content">
             <h3>Mohon Tunggu Sebentar...</h3>
             <div class="loading-spinner"></div>
             <p>Proses pengunduhan akan segera dimulai.</p>
 
-            <!-- TEMPAT KODE UNIT IKLAN ADSENSE ANDA DI SINI -->
-            <!-- Menggunakan class ads-container untuk styling placeholder -->
-            <div class="ads-container modal-ads-space"> <!-- Ditambah class modal-ads-space untuk spesifik modal -->
-                <p>Tempat Iklan AdSense (Di Modal)</p>
-                <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-5037441204470086"
-                     data-ad-slot="1326845293" <!-- Pastikan data-ad-slot ini sesuai dengan unit yang Anda buat -->
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                <!-- Akhir Kode Unit Iklan AdSense -->
+            <!-- RUANG IKLAN DI MODAL - KOSONG UNTUK SAAT INI KARENA DELAY 0 DETIK -->
+            <!-- Kode Unit Iklan AdSense telah dipindahkan ke lokasi lain. -->
+            <!-- Jika nanti Anda ingin menambah delay & iklan di modal, tempelkan kodenya di dalam div ini. -->
+            <div class="ads-container modal-ads-space" style="border: none; background: none; padding: 0; min-height: auto;">
+                 <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem;">(Ruang iklan tidak aktif dengan delay 0)</p>
             </div>
-            <!-- END TEMPAT IKLAN -->
+            <!-- END RUANG IKLAN -->
 
             <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">Terima kasih atas kesabaran Anda.</p>
         </div>
     </div>
-    <!-- ======================================================================== -->
+    <!-- ============================== -->
 
 
     <footer>
@@ -613,90 +603,67 @@
              }, 2000); // Hide after 2 seconds
         }
 
-        // === Download Modal Logic (Revised) ===
+        // === Download Modal Logic (Revised for Instant Download & No Modal Ad) ===
         const downloadModalOverlay = document.getElementById('downloadModalOverlay');
         const downloadButtons = document.querySelectorAll('.download-btn');
-        let currentDownloadLink = null; // To store the link element that was clicked
+        let downloadTimer = null; // To keep track of the timer
 
         downloadButtons.forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault(); // Stop the default link behavior
 
-                // Store the clicked link element
-                currentDownloadLink = button;
+                const downloadUrl = button.href; // Get the URL from the clicked button's href
+                const downloadTarget = button.target; // Get the target (e.g., _blank)
 
-                // 1. Tampilkan modal
-                downloadModalOverlay.classList.add('show');
-
-                // 2. Coba muat iklan AdSense di dalam modal
-                // Ini akan mencoba memuat unit iklan yang ada di dalam modal
-                if (typeof adsbygoogle !== 'undefined') {
-                     downloadModalOverlay.querySelectorAll('.adsbygoogle').forEach(adIns => {
-                         try {
-                             // Memastikan elemen iklan sudah terlihat saat push dipanggil
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            console.log("AdSense push called for modal ad unit.");
-                         } catch (e) {
-                             console.error("Error pushing AdSense ad in modal:", e);
-                         }
-                     });
-                } else {
-                    console.warn("adsbygoogle is not defined on modal show.");
+                // Clear any existing timer to prevent multiple downloads
+                if (downloadTimer) {
+                    clearTimeout(downloadTimer);
                 }
 
-                // 3. Set timer untuk memulai download setelah beberapa detik
-                const delayBeforeDownload = 5000; // Tunggu 5 detik (ubah jika perlu)
+                // 1. Tampilkan modal (akan berkedip sangat cepat karena delay 0)
+                downloadModalOverlay.classList.add('show');
+
+                // **TIDAK ADA PUSH ADSENSE DI DALAM MODAL KARENA KODE IKLAN SUDAH DIPINDAH**
+                console.log("Modal shown with 0 delay. No AdSense push in modal.");
+
+
+                // 3. Set timer untuk memulai download dengan **delay sangat singkat (0ms)**
+                // Ini akan menjalankan kode download segera setelah browser siap,
+                // tapi masih memungkinkan modal muncul (walaupun sebentar sekali).
+                const delayBeforeDownload = 0; // Set delay to 0 milliseconds
                 console.log(`Starting download timer (${delayBeforeDownload / 1000}s)...`);
 
-                setTimeout(() => {
-                    console.log("Download timer finished. Hiding modal and simulating click.");
+                downloadTimer = setTimeout(() => {
+                    console.log("Download timer finished. Hiding modal and starting download.");
                     // 4. Sembunyikan modal
                     downloadModalOverlay.classList.remove('show');
 
-                    // 5. Simulasikan klik pada link asli
-                    // Ini lebih mirip perilaku klik pengguna langsung
-                    if (currentDownloadLink) {
-                        // Create a temporary link to avoid messing with the original event listener
-                        const tempLink = document.createElement('a');
-                        tempLink.href = currentDownloadLink.href; // Copy original href
-                        if (currentDownloadLink.target) {
-                            tempLink.target = currentDownloadLink.target; // Copy original target
-                        }
-                        if (currentDownloadLink.hasAttribute('download')) {
-                            tempLink.download = currentDownloadLink.getAttribute('download'); // Copy download attribute if exists
-                        }
-
-                        // Style to hide the temporary link
-                        tempLink.style.display = 'none';
-                        document.body.appendChild(tempLink); // Add to body to make it clickable
-
-                        // Simulate the click
-                        tempLink.click();
-
-                        // Clean up the temporary link
-                        document.body.removeChild(tempLink);
-
-                        console.log(`Simulated click for URL: ${currentDownloadLink.href}`);
-
+                    // 5. Mulai proses download (buka URL target)
+                    // Menggunakan window.open untuk konsistensi dengan target="_blank" link Google Drive
+                    if (downloadTarget === '_blank') {
+                         window.open(downloadUrl, '_blank');
                     } else {
-                        console.error("No download link element found after timer!");
+                         window.location.href = downloadUrl;
                     }
 
-                    // Reset the stored link
-                    currentDownloadLink = null;
+                    downloadTimer = null; // Reset timer ID
 
                 }, delayBeforeDownload);
             });
         });
 
+
         // === Inisialisasi Unit Iklan Lain di Luar Modal ===
         // Ini membantu AdSense memuat unit iklan yang sudah terlihat saat halaman dimuat.
+        // Ini tetap aktif untuk unit iklan yang Anda tempatkan di luar modal.
          if (typeof adsbygoogle !== 'undefined') {
              console.log("Initial AdSense push for units outside modal.");
              // Mengambil semua unit iklan yang bukan di dalam modal untuk inisialisasi awal
-             // Gunakan querySelectorAll('.adsbygoogle:not(.modal-ads-space .adsbygoogle)')
-             // agar lebih spesifik tidak memasukkan unit di modal
-             document.querySelectorAll('.adsbygoogle:not(.modal-ads-space .adsbygoogle)').forEach(adIns => {
+             // Menggunakan querySelectorAll('.adsbygoogle') untuk mencakup semua unit iklan yang ada
+             document.querySelectorAll('.adsbygoogle').forEach(adIns => {
+                  // Pastikan unit ini bukan yang di dalam modal jika modal punya .adsbygoogle di dalamnya,
+                  // tapi karena kita sudah mengosongkan modal, ini sudah aman.
+                  // Filter jika perlu: if (!adIns.closest('#downloadModalOverlay')) { ... }
                  try {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
