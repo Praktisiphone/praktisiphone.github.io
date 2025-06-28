@@ -12,7 +12,7 @@
     <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Hanya mode terang permanen) -->
+    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -71,18 +71,42 @@
              color: var(--primary-color); /* Warna ikon di dark mode */
          }
 
+        /* Style untuk section diskusi online */
+        .discussion-section {
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+        .discussion-section p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .discussion-link {
+            display: inline-block;
+            background-color: var(--success-color); /* Warna hijau seperti WhatsApp */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .discussion-link:hover {
+             background-color: #1da84b; /* Warna hijau lebih gelap */
+        }
+        .discussion-link i {
+            margin-right: 8px;
+        }
+
 
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
         .download-btn:hover { background-color: var(--primary-hover); }
 
-        /* FAQ Section */
-        .faq-item { background: var(--card-bg); border-radius: 10px; margin-bottom: 1rem; }
-        .faq-question { padding: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center;}
-        .faq-answer { padding: 0 1rem 1rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 200px; /* Adjust based on content */ padding-top: 0.5rem; }
-        .faq-item.active .faq-question .fa-chevron-down { transform: rotate(180deg); }
-        .faq-question .fas { transition: transform 0.3s; }
+        /* FAQ Section (Dihapus kontennya) */
+
 
         /* Contact Section & Footer */
         .contact-section { background-color: var(--card-bg); text-align: center; padding: 3rem 2rem; border-radius: 15px; margin-top: 2rem;}
@@ -92,15 +116,59 @@
         .phone-number:hover { border-color: var(--primary-color); }
         footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
 
-        /* Floating WhatsApp Button */
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: var(--whatsapp-color); color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        /* Floating Social Buttons Container */
+        .floating-social-buttons {
+             position: fixed;
+             bottom: 40px;
+             right: 40px;
+             display: flex; /* Mengatur layout item di dalamnya */
+             flex-direction: column; /* Menyusun item secara vertikal */
+             gap: 15px; /* Jarak antar tombol */
+             z-index: 100;
+        }
+
+        /* Style dasar untuk tombol mengambang (WhatsApp & Facebook) */
+        .floating-social-buttons a {
+             width: 60px;
+             height: 60px;
+             border-radius: 50px;
+             text-align: center;
+             font-size: 30px;
+             box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             text-decoration: none;
+             color: #FFF; /* Warna ikon putih */
+        }
+
+        /* Warna spesifik untuk WhatsApp */
+        .floating-social-buttons .whatsapp-float {
+             background-color: var(--whatsapp-color);
+        }
+
+        /* Warna spesifik untuk Facebook */
+        .floating-social-buttons .facebook-float {
+             background-color: #3b5998; /* Warna biru Facebook */
+        }
+
 
         /* Notifikasi 'Copied' */
         .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
         .toast-notification.show { opacity: 1; bottom: 40px; }
 
         /* CSS for Dark Mode Toggle Slider (Dihapus elemennya, jadi aturan ini tidak relevan) */
-        /* ... aturan slider sebelumnya ... */
+
+         /* Untuk tampilan di layar yang lebih kecil, mungkin tumpuk tombol social */
+         @media (max-width: 600px) {
+            .floating-social-buttons {
+                bottom: 20px;
+                right: 20px;
+                /* flex-direction: row; /* Bisa juga baris */
+                gap: 10px;
+            }
+         }
+
 
     </style>
 </head>
@@ -164,15 +232,13 @@
                 </div>
                  <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE (EDITED - KASIR CUCIAN) === -->
-                <div class="app-card" data-category="produktivitas"> <!-- Mengubah kategori ke produktivitas -->
+                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE (KASIR CUCIAN) === -->
+                <div class="app-card" data-category="produktivitas">
                     <div class="card-content">
-                         <i class="fas fa-soap"></i> <!-- Ikon tetap sama sesuai permintaan -->
-                        <h3>aplikasi cucian.exe</h3> <!-- Judul tetap sama sesuai permintaan -->
-                        <!-- Keterangan diubah sesuai fungsi aplikasi kasir -->
+                         <i class="fas fa-soap"></i>
+                        <h3>aplikasi cucian.exe</h3>
                         <p>Aplikasi kasir praktis untuk UMKM cuci motor/mobil. Catat transaksi dengan cepat dan kelola pendapatan usaha Anda.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
-                        <!-- Link unduh tetap sama -->
                         <a href="https://drive.google.com/uc?export=download&id=1DglY2oTA_B1uT4HbehCEoOjWwYkuP3Y2" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
                         </a>
@@ -195,17 +261,18 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
-            <div class="faq-item">
-                <div class="faq-question"><span>Apakah semua aplikasi di sini aman?</span><i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Ya. Kami sangat memprioritaskan keamanan. Setiap aplikasi sudah kami pindai dengan antivirus dan kami uji coba di perangkat kami sendiri.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question"><span>Bagaimana cara install aplikasi (APK) ini?</span><i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Setelah mengunduh, buka file APK-nya. HP Anda mungkin akan meminta izin untuk "Install dari sumber tidak dikenal". Izinkan, lalu klik Install. Proses ini aman.</p></div>
-            </div>
+        <!-- === SECTION DISKUSI ONLINE === -->
+        <section class="section discussion-section">
+            <h2 class="section-title">Diskusi Online</h2>
+            <p>Bergabunglah dengan komunitas kami untuk berdiskusi, bertanya, dan berbagi pengalaman seputar aplikasi Android, perbaikan HP, atau topik lainnya!</p>
+            <a href="LINK_GRUP_DISKUSI_ANDA" target="_blank" class="discussion-link">
+                <i class="fab fa-whatsapp"></i>
+                Gabung Diskusi
+            </a>
+             <!-- CATATAN: Ganti "LINK_GRUP_DISKUSI_ANDA" dengan URL link grup WhatsApp, Telegram, Discord, atau forum Anda. -->
         </section>
+         <!-- ===================================== -->
+
 
         <section class="section contact-section">
             <h3>Punya Pertanyaan atau Butuh Bantuan?</h3>
@@ -218,10 +285,18 @@
         </section>
     </main>
 
-    <!-- Elemen di luar Main -->
-    <a href="https://wa.me/6285870163207?text=Halo%20Praktisi%20Phone%2C%20saya%20tertarik%20dengan%20aplikasi%20Anda." class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- === Floating Social Buttons Container === -->
+    <div class="floating-social-buttons">
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/6285870163207?text=Halo%20Praktisi%20Phone%2C%20saya%20tertarik%20dengan%20aplikasi%20Anda." class="whatsapp-float" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <!-- Floating Facebook Button -->
+        <a href="https://www.facebook.com/sutong.sutong20" class="facebook-float" target="_blank">
+            <i class="fab fa-facebook-f"></i> <!-- Menggunakan fa-facebook-f agar logonya pas di lingkaran -->
+        </a>
+    </div>
+    <!-- ===================================== -->
 
     <div id="toast" class="toast-notification">Nomor berhasil disalin!</div>
 
@@ -229,27 +304,14 @@
         <p>© 2024 PRAKTISI PHONE BLORA - Didukung oleh Teknologi Terkini.</p>
     </footer>
 
-    <!-- JavaScript (Hanya mode terang permanen) -->
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Logika Dark Mode Dihapus untuk permanen mode terang
             const body = document.body;
             // Semua kode terkait dark mode toggle di sini sudah dihapus.
 
-            // FAQ Accordion
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                item.querySelector('.faq-question').addEventListener('click', () => {
-                    // Close other open items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('active')) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    // Toggle current item
-                    item.classList.toggle('active');
-                });
-            });
+            // Logika FAQ Accordion Dihapus
 
             // Lazy Loading is no longer needed as icons are Font Awesome
 
