@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praktisi Phone Blora - Aplikasi Android Terlengkap</title>
-    
+
+    <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Kode AdSense Utama - DITEMPATKAN DI SINI (di dalam <head>, sebelum </head>) -->
+    <!-- Ini hanya perlu satu kali per halaman -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
+     crossorigin="anonymous"></script>
+
+    <!-- CSS (Lengkap dengan fitur baru termasuk modal) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -23,9 +30,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
-        
+
         /* Header dengan Efek Glassmorphism */
-        header { 
+        header {
             background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px var(--shadow-color); padding: 1rem 5%; position: sticky; top: 0; z-index: 1000;
         }
@@ -33,14 +40,14 @@
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
         .logo strong { font-weight: 400; color: var(--text-color); }
-        
+
         .hero { text-align: center; padding: 4rem 2rem; }
         .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
         .hero p { font-size: 1.1rem; max-width: 650px; margin: 0 auto 2rem auto; color: var(--text-secondary); }
-        
+
         .section { padding: 2rem 5% 4rem 5%; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; font-weight: 700; }
-        
+
         /* Filter dan Search Bar */
         .filter-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
         .search-bar { position: relative; width: 100%; max-width: 400px; }
@@ -54,11 +61,11 @@
         .app-card.hide { display: none; }
         .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
+        /* Styling for lazy loading/placeholder image */
         .app-card img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; align-self: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.5s; background-color: #e9ecef;}
-        body.dark-mode .app-card img { background-color: #3a3b3c; }
-        .app-card img.loaded { opacity: 1; }
-        .app-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .app-card p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem; flex-grow: 1; }
+        body.dark-mode .app-card img { background-color: #3a3b3c; } /* Dark mode placeholder */
+        .app-card img.loaded { opacity: 1; } /* Image fully loaded */
+
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
         .download-btn:hover { background-color: var(--primary-hover); }
@@ -67,7 +74,7 @@
         .faq-item { background: var(--card-bg); border-radius: 10px; margin-bottom: 1rem; }
         .faq-question { padding: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center;}
         .faq-answer { padding: 0 1rem 1rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 200px; }
+        .faq-item.active .faq-answer { max-height: 200px; /* Adjust based on content */ padding-top: 0.5rem; }
         .faq-item.active .faq-question .fa-chevron-down { transform: rotate(180deg); }
         .faq-question .fas { transition: transform 0.3s; }
 
@@ -78,13 +85,131 @@
         .phone-number span { font-size: 1.5rem; font-weight: 600; color: var(--primary-color); }
         .phone-number:hover { border-color: var(--primary-color); }
         footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
-        
+
         /* Floating WhatsApp Button */
         .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: var(--whatsapp-color); color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        
+
         /* Notifikasi 'Copied' */
         .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
         .toast-notification.show { opacity: 1; bottom: 40px; }
+
+        /* CSS for Dark Mode Toggle Slider */
+        body .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+        body .switch input { opacity: 0; width: 0; height: 0; }
+
+        body .switch .slider {
+           position: absolute;
+           cursor: pointer;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           background-color: #ccc;
+           -webkit-transition: .4s;
+           transition: .4s;
+           border-radius: 34px;
+        }
+
+        body .switch .slider:before {
+           position: absolute;
+           content: "";
+           height: 20px;
+           width: 20px;
+           left: 4px;
+           bottom: 4px;
+           background-color: white;
+           -webkit-transition: .4s;
+           transition: .4s;
+           border-radius: 50%;
+        }
+
+        body .switch input:checked + .slider {
+           background-color: var(--primary-color); /* Use primary color for dark mode toggle */
+        }
+
+        body .switch input:focus + .slider {
+           box-shadow: 0 0 1px var(--primary-color);
+        }
+
+        body .switch input:checked + .slider:before {
+           -webkit-transform: translateX(22px);
+           -ms-transform: translateX(22px);
+           transform: translateX(22px);
+        }
+
+        /* === Styles for Download Modal === */
+        .download-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Pastikan di atas elemen lain */
+            visibility: hidden; /* Initially hidden */
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .download-modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .download-modal-content {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px; /* Limit modal width */
+            width: 90%; /* Make it responsive */
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transform: scale(0.9); /* Start slightly smaller */
+            transition: transform 0.3s ease-out;
+        }
+
+         .download-modal-overlay.show .download-modal-content {
+             transform: scale(1); /* Scale up when shown */
+         }
+
+        .download-modal-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .download-modal-content .loading-spinner {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto; /* Center spinner */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Styling untuk ruang iklan AdSense di dalam modal */
+        .modal-ads-space {
+            margin: 1.5rem auto; /* Beri ruang di atas dan bawah */
+            text-align: center;
+            min-height: 100px; /* Memberikan ruang minimum untuk iklan */
+            /* Anda bisa tambahkan styling lain di sini sesuai ukuran unit iklan */
+            width: 100%; /* Agar iklan mengisi lebar maksimal modal */
+        }
+
+
+         body.dark-mode .download-modal-content {
+             background-color: var(--card-bg); /* Use dark mode card background */
+        }
+
+
     </style>
 </head>
 <body>
@@ -92,9 +217,9 @@
     <header>
         <nav>
             <div class="logo">PRAKTISI<strong>PHONE</strong></div>
-            <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 28px;">
-                <input type="checkbox" id="darkModeToggle" style="opacity: 0; width: 0; height: 0;">
-                <span class="slider" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
             </label>
         </nav>
     </header>
@@ -104,7 +229,16 @@
             <h1>Aplikasi Android Pilihan dari Praktisi Phone Blora</h1>
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
-        
+
+         <!-- LOKASI POTENSIAL UNTUK UNIT IKLAN ADSENSE LAINNYA (Opsional, butuh kode unit berbeda dari AdSense) -->
+         <!-- Anda bisa membuat unit iklan display lain di dashboard AdSense,
+              lalu tempel kode <ins> dan <script> nya di sini, misalnya:
+         <div class="section" style="text-align: center; margin-bottom: 20px;">
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5037441204470086" data-ad-slot="NOMOR-UNIT-IKLAN-LAIN" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         </div>
+         -->
+
         <section id="app-list" class="section">
             <div class="filter-container">
                 <div class="search-bar">
@@ -113,59 +247,83 @@
                 </div>
             </div>
             <div class="filter-container filter-buttons">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn" data-filter="utilitas">Utilitas</button>
-                <button class="filter-btn" data-filter="personalisasi">Personalisasi</button>
-                <button class="filter-btn" data-filter="produktivitas">Produktivitas</button>
+                 <button class="filter-btn active" data-filter="all">Semua</button>
+                 <button class="filter-btn" data-filter="utilitas">Utilitas</button>
+                 <button class="filter-btn" data-filter="personalisasi">Personalisasi</button>
+                 <button class="filter-btn" data-filter="produktivitas">Produktivitas</button>
             </div>
 
             <div class="app-grid">
-                
+
+                <!-- === KARTU APLIKASI: TOOL MTK FREE === -->
                 <div class="app-card" data-category="utilitas">
                     <div class="card-content">
+                        <!-- Menggunakan data-src untuk lazy loading -->
                         <img data-src="https://image.flaticon.com/icons/svg/1376/1376307.svg" alt="Ikon Tool MTK" class="lazy">
                         <h3>Tool MTK Free</h3>
                         <p>Aplikasi khusus untuk teknisi. Alat bantu serbaguna untuk menangani perangkat dengan chipset MediaTek (MTK).</p>
                         <div class="app-info">
-                            <span><i class="fas fa-file-archive"></i> ~5 MB</span>
-                            <span><i class="fas fa-code-branch"></i> 1.0</span>
+                            <span><i class="fas fa-file-archive"></i> ~5 MB</span> <!-- Perkiraan ukuran -->
+                            <span><i class="fas fa-code-branch"></i> 1.0</span> <!-- Versi aplikasi -->
                         </div>
+                        <!-- Tombol Unduh - Akan memicu modal -->
                         <a href="https://drive.google.com/uc?export=download&id=1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
                         </a>
                     </div>
                 </div>
+                <!-- ===================================== -->
+
                 <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=P" alt="Ikon Praktisi Flash PTO v2" class="lazy">
-                        <h3>Praktisi Flash PTO v2</h3>
-                        <p>Alat flash profesional untuk teknisi. Memudahkan proses flashing pada berbagai perangkat.</p>
-                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~20 MB</span><span><i class="fas fa-code-branch"></i> 2.0</span></div>
-                        <a href="https://drive.google.com/file/d/19yMQEqwo4OBA5FSDyzgZPAVr7CPLTl6W/view?usp=drive_link" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                        <!-- Placeholder, ganti dengan URL ikon asli -->
+                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=P" alt="Ikon Pembersih Pro" class="lazy">
+                        <h3>Pembersih Pro</h3>
+                        <p>Optimalkan kinerja HP Anda dengan satu kali klik. Hapus cache dan file sampah.</p>
+                        <div class="app-info"><span><i class="fas fa-file-archive"></i> 15 MB</span><span><i class="fas fa-code-branch"></i> 2.1.0</span></div>
+                        <!-- Tombol Unduh - Akan memicu modal -->
+                        <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
+
                 <div class="app-card" data-category="personalisasi">
                     <div class="card-content">
+                         <!-- Placeholder, ganti dengan URL ikon asli -->
                         <img data-src="https://via.placeholder.com/80/2196F3/FFFFFF?text=W" alt="Ikon WallArt HD" class="lazy">
                         <h3>WallArt HD</h3>
                         <p>Ribuan wallpaper berkualitas tinggi untuk membuat tampilan HP lebih menarik.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
+                        <!-- Tombol Unduh - Akan memicu modal -->
                         <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
 
                 <div class="app-card" data-category="produktivitas">
                     <div class="card-content">
+                         <!-- Placeholder, ganti dengan URL ikon asli -->
                         <img data-src="https://via.placeholder.com/80/FF9800/FFFFFF?text=N" alt="Ikon NoteQuick" class="lazy">
                         <h3>NoteQuick</h3>
                         <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 10 MB</span><span><i class="fas fa-code-branch"></i> 3.0.1</span></div>
+                        <!-- Tombol Unduh - Akan memicu modal -->
                         <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
-                
+
+                 <!-- LOKASI POTENSIAL LAIN UNTUK UNIT IKLAN ADSENSE (Opsional) -->
+                 <!-- Anda bisa selipkan kode unit iklan di sini di antara app-card
+                      Misalnya, setiap beberapa kartu aplikasi. -->
+
             </div>
         </section>
+
+         <!-- LOKASI POTENSIAL UNTUK UNIT IKLAN ADSENSE (Opsional) -->
+         <!-- Anda bisa tempel kode unit iklan di sini, misalnya sebelum FAQ -->
+         <!-- <div class="section" style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5037441204470086" data-ad-slot="NOMOR-UNIT-IKLAN-LAIN-LAGI" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         </div> -->
+
 
         <section class="section">
             <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
@@ -189,63 +347,84 @@
             </div>
         </section>
     </main>
-    
+
+    <!-- Elemen di luar Main -->
     <a href="https://wa.me/6285870163207?text=Halo%20Praktisi%20Phone%2C%20saya%20tertarik%20dengan%20aplikasi%20Anda." class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <div id="toast" class="toast-notification">Nomor berhasil disalin!</div>
-    
+
+    <!-- === Struktur Modal Download (Untuk Menampilkan Iklan Sebelum Download) === -->
+    <div id="downloadModalOverlay" class="download-modal-overlay">
+        <div class="download-modal-content">
+            <h3>Mohon Tunggu Sebentar...</h3>
+            <div class="loading-spinner"></div>
+            <p>Proses pengunduhan akan segera dimulai.</p>
+
+            <!-- TEMPATKAN KODE UNIT IKLAN ADSENSE ANDA DI SINI -->
+            <!-- Gantikan placeholder sebelumnya dengan kode unit iklan dari AdSense -->
+            <div class="modal-ads-space">
+                <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
+                <!-- Ini adalah kode yang Anda dapatkan dari dashboard AdSense -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-5037441204470086"
+                     data-ad-slot="1326845293" <!-- Pastikan data-ad-slot ini sesuai dengan unit yang Anda buat -->
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <!-- Akhir Kode Unit Iklan AdSense -->
+            </div>
+            <!-- END TEMPAT IKLAN -->
+
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">Terima kasih atas kesabaran Anda.</p>
+        </div>
+    </div>
+    <!-- ======================================================================== -->
+
+
     <footer>
         <p>© 2024 PRAKTISI PHONE BLORA - Didukung oleh Teknologi Terkini.</p>
+         <!-- LOKASI POTENSIAL LAIN UNTUK UNIT IKLAN ADSENSE (Opsional) -->
+         <!-- Anda bisa tempel kode unit iklan di sini di footer -->
     </footer>
 
+
+    <!-- JavaScript (Lengkap dengan fitur baru) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Dark Mode
             const darkModeToggle = document.getElementById('darkModeToggle');
             const body = document.body;
+            // Load preference from localStorage
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
                 darkModeToggle.checked = true;
             }
+            // Save preference and apply on toggle
             darkModeToggle.addEventListener('change', () => {
                 body.classList.toggle('dark-mode');
-                localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-            });
-            const sliderSpan = document.querySelector('.slider');
-            sliderSpan.style.setProperty('position', 'absolute');
-            sliderSpan.style.setProperty('content', '""');
-            sliderSpan.style.setProperty('height', '20px');
-            sliderSpan.style.setProperty('width', '20px');
-            sliderSpan.style.setProperty('left', '4px');
-            sliderSpan.style.setProperty('bottom', '4px');
-            sliderSpan.style.setProperty('transition', '.4s');
-            const sliderBefore = document.createElement('span');
-            sliderBefore.style.setProperty('position', 'absolute');
-            sliderBefore.style.setProperty('content', '""');
-            sliderBefore.style.setProperty('height', '20px');
-            sliderBefore.style.setProperty('width', '20px');
-            sliderBefore.style.setProperty('left', '4px');
-            sliderBefore.style.setProperty('bottom', '4px');
-            sliderBefore.style.setProperty('background-color', 'white');
-            sliderBefore.style.setProperty('transition', '.4s');
-            sliderBefore.style.setProperty('border-radius', '50%');
-            sliderSpan.appendChild(sliderBefore);
-            darkModeToggle.addEventListener('change', () => {
-                if (darkModeToggle.checked) {
-                    sliderBefore.style.transform = 'translateX(22px)';
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
                 } else {
-                    sliderBefore.style.transform = 'translateX(0)';
+                    localStorage.setItem('darkMode', 'disabled');
                 }
             });
-            if (darkModeToggle.checked) sliderBefore.style.transform = 'translateX(22px)';
-
 
             // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 item.querySelector('.faq-question').addEventListener('click', () => {
+                    // Close other open items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
                     item.classList.toggle('active');
                 });
             });
@@ -256,13 +435,27 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.onload = () => img.classList.add('loaded');
-                        lazyImageObserver.unobserve(img);
+                        img.src = img.dataset.src; // Load the image
+                        img.onload = () => {
+                           img.classList.add('loaded'); // Add 'loaded' class when done
+                            // Inisialisasi ulang iklan AdSense jika ada di gambar yang baru dimuat (jarang terjadi, tapi sebagai precaution)
+                            // Ini biasanya tidak perlu untuk unit iklan display standar, tapi jaga-jaga
+                            // if (typeof adsbygoogle !== 'undefined') {
+                            //     adsbygoogle.push({});
+                            // }
+                        };
+                         img.onerror = () => {
+                            // Optional: Handle image loading errors, e.g., set a fallback image
+                             console.error('Failed to load image:', img.dataset.src);
+                             // img.src = 'fallback-placeholder.png';
+                             img.classList.add('loaded'); // Still add loaded class to remove background placeholder
+                         };
+                        lazyImageObserver.unobserve(img); // Stop observing once loaded
                     }
                 });
             });
             lazyImages.forEach(img => lazyImageObserver.observe(img));
+
 
             // Filter & Search Logic
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -276,8 +469,10 @@
                 appCards.forEach(card => {
                     const cardCategory = card.dataset.category;
                     const cardTitle = card.querySelector('h3').textContent.toLowerCase();
-                    
+
+                    // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+                    // Check if title includes the search term
                     const searchMatch = cardTitle.includes(searchTerm);
 
                     if (categoryMatch && searchMatch) {
@@ -288,28 +483,135 @@
                 });
             }
 
+            // Add event listeners for filter buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
+                    // Remove active class from all buttons
                     filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to the clicked button
                     button.classList.add('active');
+                    // Apply filter and search
                     filterAndSearch();
                 });
             });
-            
+
+            // Add event listener for search input
             searchInput.addEventListener('keyup', filterAndSearch);
+
+             // Initial filter/search on page load (shows 'all')
+             filterAndSearch(); // This ensures only 'all' are shown initially and applies any pre-filled search term
         });
 
         // Copy to Clipboard Function
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 2000);
-            }).catch(err => {
-                console.error('Gagal menyalin: ', err);
-            });
+            // Use the modern Clipboard API if available
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('Nomor berhasil disalin!');
+                }).catch(err => {
+                    console.error('Gagal menyalin: ', err);
+                    // Fallback for older browsers or failed copy
+                    showToast('Gagal menyalin nomor.');
+                });
+            } else {
+                // Fallback using document.execCommand (deprecated but widely supported)
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Nomor berhasil disalin!');
+                } catch (err) {
+                    console.error('Gagal menyalin (execCommand): ', err);
+                    showToast('Gagal menyalin nomor.');
+                }
+                document.body.removeChild(textarea);
+            }
         }
+
+        // Function to show toast notification
+        function showToast(message) {
+             const toast = document.getElementById('toast');
+             toast.textContent = message; // Set the message dynamically
+             toast.classList.add('show');
+             setTimeout(() => {
+                toast.classList.remove('show');
+             }, 2000); // Hide after 2 seconds
+        }
+
+        // === Download Modal Logic ===
+        const downloadModalOverlay = document.getElementById('downloadModalOverlay');
+        const downloadButtons = document.querySelectorAll('.download-btn');
+        // Kita tidak perlu lagi mengambil placeholder div, tapi bisa merujuk ke elemen <ins> jika perlu
+        // const adInsElement = downloadModalOverlay.querySelector('.adsbygoogle'); // Dapatkan elemen ins iklan
+
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Stop the default link behavior
+
+                const downloadUrl = button.href; // Get the URL from the clicked button's href
+                const downloadTarget = button.target; // Get the target (e.g., _blank)
+
+                // 1. Tampilkan modal
+                downloadModalOverlay.classList.add('show');
+
+                // 2. Coba muat iklan AdSense di dalam modal
+                // Kita panggil push() untuk semua unit iklan yang mungkin ada di dalam modal.
+                // Karena kita sudah menempelkan kode unit iklan di HTML, push() akan menginstruksikan
+                // library AdSense untuk menampilkan iklan di elemen <ins> tersebut.
+                if (typeof adsbygoogle !== 'undefined') {
+                     downloadModalOverlay.querySelectorAll('.adsbygoogle').forEach(adIns => {
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                     });
+                     console.log("AdSense push called for modal.");
+                } else {
+                    console.warn("adsbygoogle is not defined. AdSense script might not be loaded yet.");
+                    // Mungkin perlu refresh atau jeda sebentar lagi jika script utama belum load
+                }
+
+
+                // 3. Set timer untuk memulai download setelah beberapa detik
+                const delayBeforeDownload = 5000; // Tunggu 5 detik (ubah jika perlu)
+                console.log(`Starting download timer (${delayBeforeDownload / 1000}s)...`);
+
+                setTimeout(() => {
+                    console.log("Download timer finished. Hiding modal and starting download.");
+                    // 4. Sembunyikan modal
+                    downloadModalOverlay.classList.remove('show');
+
+                    // 5. Mulai proses download (buka URL target)
+                    if (downloadTarget === '_blank') {
+                         window.open(downloadUrl, '_blank');
+                    } else {
+                         window.location.href = downloadUrl;
+                         // Atau jika href adalah link langsung ke file:
+                         // const link = document.createElement('a');
+                         // link.href = downloadUrl;
+                         // link.download = ''; // Tambahkan atribut download jika ingin memaksa download
+                         // document.body.appendChild(link);
+                         // link.click();
+                         // document.body.removeChild(link);
+                    }
+
+                }, delayBeforeDownload);
+            });
+        });
+
+        // Opsional: Tutup modal jika user mengklik tombol close (jika ada) atau di luar konten modal.
+        // Saat ini modal tidak memiliki tombol close dan klik di luar tidak menutupnya,
+        // user harus menunggu timer selesai. Ini bisa disesuaikan jika diinginkan.
+        // downloadModalOverlay.addEventListener('click', (event) => {
+        //     if (event.target === downloadModalOverlay) {
+        //         // Kode untuk membatalkan timer jika user mengklik overlay
+        //         // clearTimeout(downloadTimer); // Perlu menyimpan timer ID
+        //         // downloadModalOverlay.classList.remove('show');
+        //         // console.log("Modal closed by clicking outside.");
+        //     }
+        // });
+
     </script>
 </body>
 </html>
-```
