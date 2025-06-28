@@ -266,25 +266,33 @@
                             <span><i class="fas fa-file-archive"></i> ~5 MB</span> <!-- Perkiraan ukuran -->
                             <span><i class="fas fa-code-branch"></i> 1.0</span> <!-- Versi aplikasi -->
                         </div>
-                        <!-- Tombol Unduh - Akan memicu modal -->
-                        <a href="https://drive.google.com/uc?export=download&id=1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE" target="_blank" class="download-btn">
+                        <!-- Tombol Unduh - Link diperbarui -->
+                        <a href="https://drive.google.com/file/d/1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE/view?usp=drive_link" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
                         </a>
                     </div>
                 </div>
                 <!-- ===================================== -->
 
-                <div class="app-card" data-category="utilitas">
+                <!-- === KARTU APLIKASI: PRAKTISI FLASH TOOL V2 (Dulunya Pembersih Pro) === -->
+                <div class="app-card" data-category="utilitas"> <!-- Kategori tetap utilitas -->
                     <div class="card-content">
-                        <!-- Placeholder, ganti dengan URL ikon asli -->
-                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=P" alt="Ikon Pembersih Pro" class="lazy">
-                        <h3>Pembersih Pro</h3>
-                        <p>Optimalkan kinerja HP Anda dengan satu kali klik. Hapus cache dan file sampah.</p>
-                        <div class="app-info"><span><i class="fas fa-file-archive"></i> 15 MB</span><span><i class="fas fa-code-branch"></i> 2.1.0</span></div>
-                        <!-- Tombol Unduh - Akan memicu modal -->
-                        <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                        <!-- Ganti URL ikon placeholder ini dengan ikon yang relevan untuk flash tool -->
+                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=PF" alt="Ikon Praktisi Flash Tool" class="lazy"> <!-- Ubah teks ikon sementara -->
+                        <h3>Praktisi Flash Tool v2</h3> <!-- Nama diubah -->
+                        <p>Alat serbaguna untuk keperluan flashing dan perbaikan software HP. Wajib punya bagi teknisi.</p> <!-- Deskripsi diperbarui -->
+                        <div class="app-info">
+                             <span><i class="fas fa-file-archive"></i> 20 MB</span> <!-- Perkiraan ukuran -->
+                             <span><i class="fas fa-code-branch"></i> 2.0</span> <!-- Versi diperbarui -->
+                        </div>
+                        <!-- Tombol Unduh - Link diperbarui (sama dengan Tool MTK Free sesuai permintaan) -->
+                        <a href="https://drive.google.com/file/d/1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE/view?usp=drive_link" target="_blank" class="download-btn">
+                            <i class="fas fa-download"></i> Unduh
+                        </a>
                     </div>
                 </div>
+                <!-- ================================================================== -->
+
 
                 <div class="app-card" data-category="personalisasi">
                     <div class="card-content">
@@ -293,7 +301,7 @@
                         <h3>WallArt HD</h3>
                         <p>Ribuan wallpaper berkualitas tinggi untuk membuat tampilan HP lebih menarik.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
-                        <!-- Tombol Unduh - Akan memicu modal -->
+                        <!-- Tombol Unduh - Link masih placeholder, perlu diganti -->
                         <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
@@ -305,7 +313,7 @@
                         <h3>NoteQuick</h3>
                         <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 10 MB</span><span><i class="fas fa-code-branch"></i> 3.0.1</span></div>
-                        <!-- Tombol Unduh - Akan memicu modal -->
+                        <!-- Tombol Unduh - Link masih placeholder, perlu diganti -->
                         <a href="#" download class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
@@ -319,10 +327,6 @@
 
          <!-- LOKASI POTENSIAL UNTUK UNIT IKLAN ADSENSE (Opsional) -->
          <!-- Anda bisa tempel kode unit iklan di sini, misalnya sebelum FAQ -->
-         <!-- <div class="section" style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
-              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5037441204470086" data-ad-slot="NOMOR-UNIT-IKLAN-LAIN-LAGI" data-ad-format="auto" data-full-width-responsive="true"></ins>
-              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-         </div> -->
 
 
         <section class="section">
@@ -362,7 +366,7 @@
             <div class="loading-spinner"></div>
             <p>Proses pengunduhan akan segera dimulai.</p>
 
-            <!-- TEMPATKAN KODE UNIT IKLAN ADSENSE ANDA DI SINI -->
+            <!-- TEMPAT KODE UNIT IKLAN ADSENSE ANDA DI SINI -->
             <!-- Gantikan placeholder sebelumnya dengan kode unit iklan dari AdSense -->
             <div class="modal-ads-space">
                 <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
@@ -438,11 +442,6 @@
                         img.src = img.dataset.src; // Load the image
                         img.onload = () => {
                            img.classList.add('loaded'); // Add 'loaded' class when done
-                            // Inisialisasi ulang iklan AdSense jika ada di gambar yang baru dimuat (jarang terjadi, tapi sebagai precaution)
-                            // Ini biasanya tidak perlu untuk unit iklan display standar, tapi jaga-jaga
-                            // if (typeof adsbygoogle !== 'undefined') {
-                            //     adsbygoogle.push({});
-                            // }
                         };
                          img.onerror = () => {
                             // Optional: Handle image loading errors, e.g., set a fallback image
@@ -564,12 +563,17 @@
                 // library AdSense untuk menampilkan iklan di elemen <ins> tersebut.
                 if (typeof adsbygoogle !== 'undefined') {
                      downloadModalOverlay.querySelectorAll('.adsbygoogle').forEach(adIns => {
-                         (adsbygoogle = window.adsbygoogle || []).push({});
+                         try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            console.log("AdSense push called for a modal ad unit.");
+                         } catch (e) {
+                             console.error("Error pushing AdSense ad:", e);
+                         }
                      });
-                     console.log("AdSense push called for modal.");
                 } else {
                     console.warn("adsbygoogle is not defined. AdSense script might not be loaded yet.");
-                    // Mungkin perlu refresh atau jeda sebentar lagi jika script utama belum load
+                    // Ini bisa terjadi jika AdSense script di <head> belum selesai load
+                    // Anda mungkin perlu menambahkan logika retry atau sedikit delay sebelum push
                 }
 
 
@@ -583,17 +587,11 @@
                     downloadModalOverlay.classList.remove('show');
 
                     // 5. Mulai proses download (buka URL target)
+                    // Karena linknya ke Google Drive View, ini akan membuka halaman view Google Drive
                     if (downloadTarget === '_blank') {
                          window.open(downloadUrl, '_blank');
                     } else {
                          window.location.href = downloadUrl;
-                         // Atau jika href adalah link langsung ke file:
-                         // const link = document.createElement('a');
-                         // link.href = downloadUrl;
-                         // link.download = ''; // Tambahkan atribut download jika ingin memaksa download
-                         // document.body.appendChild(link);
-                         // link.click();
-                         // document.body.removeChild(link);
                     }
 
                 }, delayBeforeDownload);
