@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS (Lengkap dengan fitur baru) -->
@@ -18,6 +19,7 @@
             --bg-color: #f0f2f5; --card-bg: #ffffff; --text-color: #1c1e21; --text-secondary: #65676b;
             --border-color: #dddfe2; --shadow-color: rgba(0, 0, 0, 0.1); --font-family: 'Poppins', sans-serif;
         }
+        /* Aturan dark mode tetap ada, tapi tidak akan diterapkan karena toggle dan JS logic dihapus */
         body.dark-mode {
             --bg-color: #18191a; --card-bg: #242526; --text-color: #e4e6eb; --text-secondary: #b0b3b8;
             --border-color: #3a3b3c; --shadow-color: rgba(0, 0, 0, 0.3);
@@ -31,6 +33,7 @@
             background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px var(--shadow-color); padding: 1rem 5%; position: sticky; top: 0; z-index: 1000;
         }
+        /* Aturan dark mode untuk header tetap ada */
         body.dark-mode header { background: rgba(36, 37, 38, 0.8); }
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
@@ -56,10 +59,18 @@
         .app-card.hide { display: none; }
         .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
-        /* Styling for lazy loading/placeholder image */
-        .app-card img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; align-self: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.5s; background-color: #e9ecef;}
-        body.dark-mode .app-card img { background-color: #3a3b3c; } /* Dark mode placeholder */
-        .app-card img.loaded { opacity: 1; } /* Image fully loaded */
+
+        /* CSS untuk ikon Font Awesome */
+        .app-card .card-content i.fas {
+            font-size: 4rem; /* Ukuran ikon */
+            margin-bottom: 1rem; /* Jarak bawah seperti img */
+            align-self: center; /* Tengahkan ikon */
+            color: var(--primary-color); /* Warna ikon, bisa disesuaikan */
+        }
+         body.dark-mode .app-card .card-content i.fas { /* Aturan ini tetap ada tapi tidak akan diterapkan */
+             color: var(--primary-color); /* Warna ikon di dark mode */
+         }
+
 
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
@@ -88,7 +99,7 @@
         .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
         .toast-notification.show { opacity: 1; bottom: 40px; }
 
-        /* CSS for Dark Mode Toggle Slider */
+        /* CSS for Dark Mode Toggle Slider (Aturan ini tetap ada tapi elemen toggle dihapus) */
         body .switch .slider {
            position: absolute;
            cursor: pointer;
@@ -116,7 +127,7 @@
         }
 
         body .switch input:checked + .slider {
-           background-color: var(--primary-color); /* Use primary color for dark mode toggle */
+           background-color: var(--primary-color);
         }
 
         body .switch input:focus + .slider {
@@ -124,7 +135,7 @@
         }
 
         body .switch input:checked + .slider:before {
-           -webkit-transform: translateX(22px); /* 50px (width) - 20px (circle) - 2*4px (padding) = 22px */
+           -webkit-transform: translateX(22px);
            -ms-transform: translateX(22px);
            transform: translateX(22px);
         }
@@ -136,10 +147,11 @@
     <header>
         <nav>
             <div class="logo">PRAKTISI<strong>PHONE</strong></div>
-            <label class="switch">
+            <!-- Tombol Dark Mode Dihapus -->
+            <!-- <label class="switch">
                 <input type="checkbox" id="darkModeToggle">
                 <span class="slider"></span>
-            </label>
+            </label> -->
         </nav>
     </header>
 
@@ -168,13 +180,12 @@
                 <!-- === KARTU APLIKASI: TOOL MTK FREE === -->
                 <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                        <!-- Menggunakan data-src untuk lazy loading -->
-                        <img data-src="https://image.flaticon.com/icons/svg/1376/1376307.svg" alt="Ikon Tool MTK" class="lazy">
+                        <i class="fas fa-tools"></i>
                         <h3>Tool MTK Free</h3>
                         <p>Aplikasi khusus untuk teknisi. Alat bantu serbaguna untuk menangani perangkat dengan chipset MediaTek (MTK).</p>
                         <div class="app-info">
-                            <span><i class="fas fa-file-archive"></i> ~5 MB</span> <!-- Perkiraan ukuran -->
-                            <span><i class="fas fa-code-branch"></i> 1.0</span> <!-- Versi aplikasi -->
+                            <span><i class="fas fa-file-archive"></i> ~5 MB</span>
+                            <span><i class="fas fa-code-branch"></i> 1.0</span>
                         </div>
                         <a href="https://drive.google.com/uc?export=download&id=1gUUQz0AYtNHM4fmfnLZjgh5OD4JDmylE" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
@@ -183,43 +194,43 @@
                 </div>
                 <!-- ===================================== -->
 
+                <!-- === KARTU APLIKASI: PRAKTISI FLASHTOOL === -->
                 <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                        <!-- Placeholder, ganti dengan URL ikon asli -->
-                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=P" alt="Ikon Pembersih Pro" class="lazy">
-                        <h3>Pembersih Pro</h3>
-                        <p>Optimalkan kinerja HP Anda dengan satu kali klik. Hapus cache dan file sampah.</p>
-                        <div class="app-info"><span><i class="fas fa-file-archive"></i> 15 MB</span><span><i class="fas fa-code-branch"></i> 2.1.0</span></div>
-                        <a href="#" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                        <i class="fas fa-terminal"></i>
+                        <h3>Praktisi FlashTool</h3>
+                        <p>Alat esensial untuk flashing firmware, perbaikan software, dan debugging perangkat Android.</p>
+                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~30 MB</span><span><i class="fas fa-code-branch"></i> 1.0</span></div>
+                        <a href="https://drive.google.com/uc?export=download&id=19yMQEqwo4OBA5FSDyzgZPAVr7CPLTl6W" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
+                 <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: WALLART HD (EDITED) === -->
-                <div class="app-card" data-category="personalisasi">
+                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE === -->
+                <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                         <!-- Placeholder, ganti dengan URL ikon asli -->
-                        <img data-src="https://via.placeholder.com/80/2196F3/FFFFFF?text=W" alt="Ikon WallArt HD" class="lazy">
-                        <h3>WallArt HD</h3>
-                        <p>Ribuan wallpaper berkualitas tinggi untuk membuat tampilan HP lebih menarik.</p>
+                         <i class="fas fa-soap"></i>
+                        <h3>aplikasi cucian.exe</h3>
+                        <p>Membersihkan file-file 'kotor' dan 'tidak perlu' di perangkat Anda. Lakukan pembersihan berkala untuk performa optimal.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
-                        <!-- Link unduh diubah ke link Google Drive direct download -->
-                        <a href="https://drive.google.com/uc?export=download&id=1DglY2oTA_B1uT4HbehCEoOjWwYkuP3Y" target="_blank" class="download-btn">
+                        <a href="https://drive.google.com/uc?export=download&id=1DglY2oTA_B1uT4HbehCEoOjWwYkuP3Y2" target="_blank" class="download-btn">
                             <i class="fas fa-download"></i> Unduh
                         </a>
                     </div>
                 </div>
                 <!-- ===================================== -->
 
+                <!-- === KARTU APLIKASI: NOTEQUICK === -->
                 <div class="app-card" data-category="produktivitas">
                     <div class="card-content">
-                         <!-- Placeholder, ganti dengan URL ikon asli -->
-                        <img data-src="https://via.placeholder.com/80/FF9800/FFFFFF?text=N" alt="Ikon NoteQuick" class="lazy">
+                         <i class="fas fa-sticky-note"></i>
                         <h3>NoteQuick</h3>
                         <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 10 MB</span><span><i class="fas fa-code-branch"></i> 3.0.1</span></div>
                         <a href="#" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
+                <!-- ===================================== -->
 
             </div>
         </section>
@@ -261,23 +272,27 @@
     <!-- JavaScript (Lengkap dengan fitur baru) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Dark Mode
-            const darkModeToggle = document.getElementById('darkModeToggle');
+            // --- Logika Dark Mode Dihapus ---
+            // const darkModeToggle = document.getElementById('darkModeToggle'); // Dihapus karena elemennya dihapus
             const body = document.body;
-            // Load preference from localStorage
+
+            // Bagian load preference & toggle event listener dihapus
+            /*
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
-                darkModeToggle.checked = true;
+                // darkModeToggle.checked = true; // Dihapus
             }
-            // Save preference and apply on toggle
-            darkModeToggle.addEventListener('change', () => {
-                body.classList.toggle('dark-mode');
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            });
+            // darkModeToggle.addEventListener('change', () => { // Dihapus
+            //     body.classList.toggle('dark-mode');
+            //     if (body.classList.contains('dark-mode')) {
+            //         localStorage.setItem('darkMode', 'enabled');
+            //     } else {
+            //         localStorage.setItem('darkMode', 'disabled');
+            //     }
+            // });
+            */
+            // --- End of Dark Mode Logic ---
+
 
             // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
@@ -294,28 +309,7 @@
                 });
             });
 
-            // Lazy Loading Images
-            const lazyImages = document.querySelectorAll('img.lazy');
-            const lazyImageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src; // Load the image
-                        img.onload = () => {
-                           img.classList.add('loaded'); // Add 'loaded' class when done
-                        };
-                         img.onerror = () => {
-                            // Optional: Handle image loading errors, e.g., set a fallback image
-                             console.error('Failed to load image:', img.dataset.src);
-                             // img.src = 'fallback-placeholder.png';
-                             img.classList.add('loaded'); // Still add loaded class to remove background placeholder
-                         };
-                        lazyImageObserver.unobserve(img); // Stop observing once loaded
-                    }
-                });
-            });
-            lazyImages.forEach(img => lazyImageObserver.observe(img));
-
+            // Lazy Loading is no longer needed as icons are Font Awesome
 
             // Filter & Search Logic
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -399,19 +393,14 @@
              toast.classList.add('show');
              setTimeout(() => {
                 toast.classList.remove('show');
-            }, 2000); // Hide after 2 seconds
+             }, 2000); // Hide after 2 seconds
         }
 
-        // Adjust CSS for the slider before element based on initial state
+        // Adjust CSS for the slider before element based on initial state (Kode ini tidak lagi diperlukan karena elemen toggle dihapus, tapi dibiarkan agar tidak merusak struktur script)
         document.addEventListener('DOMContentLoaded', () => {
-             const darkModeToggle = document.getElementById('darkModeToggle');
-             const slider = document.querySelector('.switch .slider');
-             // The slider::before pseudo-element cannot be directly styled via JS,
-             // but we can use the checkbox state to control its position via CSS rules.
-             // The provided CSS handles this transformation automatically based on :checked state.
-             // We just need to ensure the checkbox state is correctly set on load based on localStorage.
-             // This is already handled in the Dark Mode section.
-             // The CSS rules for slider and slider:before need to be inside the style block.
+             // const darkModeToggle = document.getElementById('darkModeToggle'); // Dihapus
+             // const slider = document.querySelector('.switch .slider'); // Dihapus
+             // Logic di sini tidak perlu dijalankan lagi
         });
 
 
