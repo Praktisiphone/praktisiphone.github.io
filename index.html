@@ -16,7 +16,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
      crossorigin="anonymous"></script>
 
-    <!-- CSS (Lengkap dengan fitur baru termasuk modal) -->
+    <!-- CSS (Lengkap dengan fitur baru termasuk modal dan styling iklan) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -195,14 +195,32 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Styling untuk ruang iklan AdSense di dalam modal */
-        .modal-ads-space {
+        /* Styling untuk ruang iklan AdSense di dalam modal dan tempat lain */
+        .ads-container { /* Menggunakan nama kelas yang lebih umum */
             margin: 1.5rem auto; /* Beri ruang di atas dan bawah */
             text-align: center;
             min-height: 100px; /* Memberikan ruang minimum untuk iklan */
             /* Anda bisa tambahkan styling lain di sini sesuai ukuran unit iklan */
-            width: 100%; /* Agar iklan mengisi lebar maksimal modal */
+            width: 100%; /* Agar iklan mengisi lebar maksimal ruangnya */
+             background-color: #eee; /* Contoh latar belakang placeholder */
+             color: #666;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 0.9rem;
+             border: 1px dashed #ccc;
+             padding: 10px; /* Tambahkan padding agar teks placeholder terlihat */
         }
+         body.dark-mode .ads-container {
+             background-color: #3a3b3c;
+             color: #b0b3b8;
+             border-color: #555;
+        }
+         /* Sesuaikan gaya jika iklan benar-benar dimuat */
+         .ads-container ins {
+             display: block !important; /* AdSense sering membutuhkan display: block */
+             margin: 0 auto !important; /* Pusatkan iklan AdSense jika perlu */
+         }
 
 
          body.dark-mode .download-modal-content {
@@ -230,14 +248,25 @@
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
 
-         <!-- LOKASI POTENSIAL UNTUK UNIT IKLAN ADSENSE LAINNYA (Opsional, butuh kode unit berbeda dari AdSense) -->
-         <!-- Anda bisa membuat unit iklan display lain di dashboard AdSense,
-              lalu tempel kode <ins> dan <script> nya di sini, misalnya:
-         <div class="section" style="text-align: center; margin-bottom: 20px;">
-              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5037441204470086" data-ad-slot="NOMOR-UNIT-IKLAN-LAIN" data-ad-format="auto" data-full-width-responsive="true"></ins>
-              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         <!-- LOKASI UNTUK UNIT IKLAN ADSENSE (Contoh 1: Di bawah Hero Section) -->
+         <div class="section">
+             <!-- Kode Unit Iklan AdSense Ditempatkan di sini -->
+             <!-- Menggunakan class ads-container untuk styling placeholder -->
+             <div class="ads-container">
+                 <p>Tempat Iklan AdSense (Bawah Hero)</p>
+                 <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
+                 <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-5037441204470086"
+                      data-ad-slot="1326845293" <!-- Menggunakan data-ad-slot yang sama -->
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+                 <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                 </script>
+             </div>
          </div>
-         -->
+
 
         <section id="app-list" class="section">
             <div class="filter-container">
@@ -294,6 +323,25 @@
                 <!-- ================================================================== -->
 
 
+                <!-- LOKASI UNTUK UNIT IKLAN ADSENSE (Contoh 2: Di dalam Grid Aplikasi) -->
+                <!-- Anda bisa selipkan di sini, misalnya setelah 2 atau 3 kartu -->
+                 <div class="app-card" style="background: none; box-shadow: none;">
+                      <div class="ads-container">
+                           <p>Tempat Iklan AdSense (Dalam Grid)</p>
+                           <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
+                           <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-5037441204470086"
+                                data-ad-slot="1326845293" <!-- Menggunakan data-ad-slot yang sama -->
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
+                           <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                           </script>
+                      </div>
+                 </div>
+
+
                 <div class="app-card" data-category="personalisasi">
                     <div class="card-content">
                          <!-- Placeholder, ganti dengan URL ikon asli -->
@@ -319,14 +367,27 @@
                 </div>
 
                  <!-- LOKASI POTENSIAL LAIN UNTUK UNIT IKLAN ADSENSE (Opsional) -->
-                 <!-- Anda bisa selipkan kode unit iklan di sini di antara app-card
-                      Misalnya, setiap beberapa kartu aplikasi. -->
+                 <!-- Anda bisa selipkan kode unit iklan di sini di antara app-card lainnya -->
 
             </div>
         </section>
 
-         <!-- LOKASI POTENSIAL UNTUK UNIT IKLAN ADSENSE (Opsional) -->
-         <!-- Anda bisa tempel kode unit iklan di sini, misalnya sebelum FAQ -->
+         <!-- LOKASI UNTUK UNIT IKLAN ADSENSE (Contoh 3: Sebelum FAQ Section) -->
+         <div class="section">
+              <div class="ads-container">
+                  <p>Tempat Iklan AdSense (Sebelum FAQ)</p>
+                  <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-client="ca-pub-5037441204470086"
+                       data-ad-slot="1326845293" <!-- Menggunakan data-ad-slot yang sama -->
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
+                  <script>
+                       (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
+              </div>
+         </div>
 
 
         <section class="section">
@@ -367,10 +428,10 @@
             <p>Proses pengunduhan akan segera dimulai.</p>
 
             <!-- TEMPAT KODE UNIT IKLAN ADSENSE ANDA DI SINI -->
-            <!-- Gantikan placeholder sebelumnya dengan kode unit iklan dari AdSense -->
-            <div class="modal-ads-space">
+            <!-- Menggunakan class ads-container untuk styling placeholder -->
+            <div class="ads-container modal-ads-space"> <!-- Ditambah class modal-ads-space untuk spesifik modal -->
+                <p>Tempat Iklan AdSense (Di Modal)</p>
                 <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
-                <!-- Ini adalah kode yang Anda dapatkan dari dashboard AdSense -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-5037441204470086"
@@ -392,8 +453,20 @@
 
     <footer>
         <p>© 2024 PRAKTISI PHONE BLORA - Didukung oleh Teknologi Terkini.</p>
-         <!-- LOKASI POTENSIAL LAIN UNTUK UNIT IKLAN ADSENSE (Opsional) -->
-         <!-- Anda bisa tempel kode unit iklan di sini di footer -->
+         <!-- LOKASI UNTUK UNIT IKLAN ADSENSE (Contoh 4: Di Footer) -->
+         <div class="ads-container">
+              <p>Tempat Iklan AdSense (Di Footer)</p>
+              <!-- Kode Unit Iklan AdSense Anda Ditempatkan di sini -->
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-5037441204470086"
+                   data-ad-slot="1326845293" <!-- Menggunakan data-ad-slot yang sama -->
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+              <script>
+                   (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+         </div>
     </footer>
 
 
@@ -544,8 +617,6 @@
         // === Download Modal Logic ===
         const downloadModalOverlay = document.getElementById('downloadModalOverlay');
         const downloadButtons = document.querySelectorAll('.download-btn');
-        // Kita tidak perlu lagi mengambil placeholder div, tapi bisa merujuk ke elemen <ins> jika perlu
-        // const adInsElement = downloadModalOverlay.querySelector('.adsbygoogle'); // Dapatkan elemen ins iklan
 
         downloadButtons.forEach(button => {
             button.addEventListener('click', (event) => {
@@ -559,21 +630,24 @@
 
                 // 2. Coba muat iklan AdSense di dalam modal
                 // Kita panggil push() untuk semua unit iklan yang mungkin ada di dalam modal.
-                // Karena kita sudah menempelkan kode unit iklan di HTML, push() akan menginstruksikan
-                // library AdSense untuk menampilkan iklan di elemen <ins> tersebut.
+                // Karena kita sudah menempelkan kode unit iklan di HTML di lokasi modal,
+                // push() akan menginstruksikan library AdSense untuk menampilkan iklan di elemen <ins> tersebut.
+                // Ini perlu dilakukan setiap kali modal ditampilkan karena elemen <ins> mungkin belum terlihat sebelumnya.
                 if (typeof adsbygoogle !== 'undefined') {
                      downloadModalOverlay.querySelectorAll('.adsbygoogle').forEach(adIns => {
                          try {
+                            // Pastikan elemen ins terlihat atau dalam viewport untuk di-render oleh AdSense
+                            // Dalam kasus modal, begitu modal show, elemen ins jadi terlihat.
                             (adsbygoogle = window.adsbygoogle || []).push({});
                             console.log("AdSense push called for a modal ad unit.");
                          } catch (e) {
-                             console.error("Error pushing AdSense ad:", e);
+                             console.error("Error pushing AdSense ad in modal:", e);
                          }
                      });
                 } else {
                     console.warn("adsbygoogle is not defined. AdSense script might not be loaded yet.");
-                    // Ini bisa terjadi jika AdSense script di <head> belum selesai load
-                    // Anda mungkin perlu menambahkan logika retry atau sedikit delay sebelum push
+                    // Jika script utama belum load, push tidak akan bekerja.
+                    // Anda bisa menambahkan jeda singkat dan mencoba lagi, tapi ini opsional.
                 }
 
 
@@ -589,26 +663,48 @@
                     // 5. Mulai proses download (buka URL target)
                     // Karena linknya ke Google Drive View, ini akan membuka halaman view Google Drive
                     if (downloadTarget === '_blank') {
+                         // Membuka di tab baru
                          window.open(downloadUrl, '_blank');
                     } else {
+                         // Membuka di tab yang sama (bisa menyebabkan "back" jika browser menginterpretasikan history)
                          window.location.href = downloadUrl;
+                         // Untuk link download file langsung, ini seringkali bekerja.
+                         // Untuk link view Google Drive, membuka di _blank lebih disarankan.
                     }
 
                 }, delayBeforeDownload);
             });
         });
 
-        // Opsional: Tutup modal jika user mengklik tombol close (jika ada) atau di luar konten modal.
-        // Saat ini modal tidak memiliki tombol close dan klik di luar tidak menutupnya,
-        // user harus menunggu timer selesai. Ini bisa disesuaikan jika diinginkan.
-        // downloadModalOverlay.addEventListener('click', (event) => {
-        //     if (event.target === downloadModalOverlay) {
-        //         // Kode untuk membatalkan timer jika user mengklik overlay
-        //         // clearTimeout(downloadTimer); // Perlu menyimpan timer ID
-        //         // downloadModalOverlay.classList.remove('show');
-        //         // console.log("Modal closed by clicking outside.");
-        //     }
-        // });
+        // === Inisialisasi Unit Iklan Lain di Luar Modal ===
+        // Unit iklan di luar modal perlu diinisialisasi saat halaman pertama kali dimuat
+        // Kode utama AdSense sudah otomatis mencoba mencari elemen <ins class="adsbygoogle">
+        // di seluruh halaman setelah script utama dimuat.
+        // Namun, memanggil push({}) secara manual setelah DOMContentLoaded bisa membantu
+        // memastikan unit iklan yang sudah ada di HTML (di luar modal) dimuat.
+        // UNIT IKLAN DI DALAM GRID APLIKASI YANG AWALNYA HIDE KARENA FILTER AKAN MEMERLUKAN
+        // PUSH LAGI KETIKA FILTER/SEARCH MEMBUATNYA TERLIHAT.
+        // Logika filter/search kita saat ini tidak memanggil push() saat kartu ditampilkan.
+        // Ini adalah kompleksitas AdSense dengan konten yang dinamis/tersembunyi.
+        // Untuk sederhana, kita panggil push untuk SEMUA unit iklan di halaman saat DOMContentLoaded.
+        // Ini akan mencoba memuat unit yang sudah terlihat. Unit yang awalnya tersembunyi
+        // mungkin tidak langsung dimuat sampai terlihat, dan mungkin butuh push() ulang.
+
+         if (typeof adsbygoogle !== 'undefined') {
+             console.log("Initial AdSense push for units outside modal.");
+             // Mengambil semua unit iklan yang bukan di dalam modal untuk inisialisasi awal
+             document.querySelectorAll('.adsbygoogle:not(#downloadModalOverlay .adsbygoogle)').forEach(adIns => {
+                 try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
+                 } catch (e) {
+                     console.error("Error pushing AdSense ad:", adIns.getAttribute('data-ad-slot'), e);
+                 }
+             });
+         } else {
+             console.warn("adsbygoogle is not defined on load. Initial ads might not load.");
+         }
+
 
     </script>
 </body>
