@@ -16,16 +16,33 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
      crossorigin="anonymous"></script>
 
-    <!-- CSS (Lengkap dengan fitur baru termasuk modal dan styling iklan) -->
+    <!-- CSS (Lengkap dengan fitur baru termasuk modal, styling iklan, dan ikon generate) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
             --bg-color: #f0f2f5; --card-bg: #ffffff; --text-color: #1c1e21; --text-secondary: #65676b;
             --border-color: #dddfe2; --shadow-color: rgba(0, 0, 0, 0.1); --font-family: 'Poppins', sans-serif;
+
+            /* Warna untuk ikon generate (bisa disesuaikan) */
+            --icon-bg-mtk: #FF5722; /* Oranye */
+            --icon-text-mtk: white;
+            --icon-bg-flash: #673AB7; /* Ungu */
+            --icon-text-flash: white;
+             /* Warna default jika app-id tidak cocok */
+            --icon-bg-default: #607D8B; /* Abu-abu kebiruan */
+            --icon-text-default: white;
         }
         body.dark-mode {
             --bg-color: #18191a; --card-bg: #242526; --text-color: #e4e6eb; --text-secondary: #b0b3b8;
             --border-color: #3a3b3c; --shadow-color: rgba(0, 0, 0, 0.3);
+
+            /* Sesuaikan warna ikon untuk dark mode jika perlu */
+            --icon-bg-mtk: #E65100; /* Oranye lebih gelap */
+            --icon-text-mtk: #e4e6eb;
+            --icon-bg-flash: #512DA8; /* Ungu lebih gelap */
+            --icon-text-flash: #e4e6eb;
+            --icon-bg-default: #455A64; /* Abu-abu kebiruan lebih gelap */
+            --icon-text-default: #e4e6eb;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -61,10 +78,38 @@
         .app-card.hide { display: none; }
         .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
-        /* Styling for lazy loading/placeholder image */
-        .app-card img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; align-self: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.5s; background-color: #e9ecef;}
-        body.dark-mode .app-card img { background-color: #3a3b3c; } /* Dark mode placeholder */
-        .app-card img.loaded { opacity: 1; } /* Image fully loaded */
+
+        /* Styling untuk tag img yang pakai lazy load */
+        .app-card img.lazy { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; align-self: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.5s; background-color: #e9ecef;}
+        body.dark-mode .app-card img.lazy { background-color: #3a3b3c; }
+        .app-card img.loaded { opacity: 1; }
+
+        /* Styling untuk ikon yang digenerate */
+        .app-icon-generated {
+            width: 80px; height: 80px;
+            border-radius: 20px;
+            align-self: center;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem; /* Ukuran teks inisial */
+            font-weight: 700;
+            color: var(--icon-text-default); /* Default text color */
+            background-color: var(--icon-bg-default); /* Default background color */
+            /* Tidak perlu opacity 0 atau transition opacity */
+        }
+
+        /* Warna spesifik untuk ikon yang digenerate */
+        .app-icon-generated[data-app-id="tool-mtk-free"] {
+            background-color: var(--icon-bg-mtk);
+            color: var(--icon-text-mtk);
+        }
+         .app-icon-generated[data-app-id="praktisi-flash-tool-v2"] {
+            background-color: var(--icon-bg-flash);
+            color: var(--icon-text-flash);
+        }
+
 
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
@@ -108,19 +153,6 @@
            -webkit-transition: .4s;
            transition: .4s;
            border-radius: 34px;
-        }
-
-        body .switch .slider:before {
-           position: absolute;
-           content: "";
-           height: 20px;
-           width: 20px;
-           left: 4px;
-           bottom: 4px;
-           background-color: white;
-           -webkit-transition: .4s;
-           transition: .4s;
-           border-radius: 50%;
         }
 
         body .switch input:checked + .slider {
@@ -287,8 +319,8 @@
                 <!-- === KARTU APLIKASI: TOOL MTK FREE === -->
                 <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                        <!-- Menggunakan data-src untuk lazy loading -->
-                        <img data-src="https://image.flaticon.com/icons/svg/1376/1376307.svg" alt="Ikon Tool MTK" class="lazy">
+                        <!-- Menggunakan div untuk ikon yang digenerate -->
+                        <div class="app-icon-generated" data-app-id="tool-mtk-free"></div>
                         <h3>Tool MTK Free</h3>
                         <p>Aplikasi khusus untuk teknisi. Alat bantu serbaguna untuk menangani perangkat dengan chipset MediaTek (MTK).</p>
                         <div class="app-info">
@@ -306,8 +338,8 @@
                 <!-- === KARTU APLIKASI: PRAKTISI FLASH TOOL V2 (Dulunya Pembersih Pro) === -->
                 <div class="app-card" data-category="utilitas"> <!-- Kategori tetap utilitas -->
                     <div class="card-content">
-                        <!-- Ganti URL ikon placeholder ini dengan ikon yang relevan untuk flash tool -->
-                        <img data-src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=PF" alt="Ikon Praktisi Flash Tool" class="lazy"> <!-- Ubah teks ikon sementara -->
+                         <!-- Menggunakan div untuk ikon yang digenerate -->
+                        <div class="app-icon-generated" data-app-id="praktisi-flash-tool-v2"></div>
                         <h3>Praktisi Flash Tool v2</h3> <!-- Nama diubah -->
                         <p>Alat serbaguna untuk keperluan flashing dan perbaikan software HP. Wajib punya bagi teknisi.</p> <!-- Deskripsi diperbarui -->
                         <div class="app-info">
@@ -344,7 +376,7 @@
 
                 <div class="app-card" data-category="personalisasi">
                     <div class="card-content">
-                         <!-- Placeholder, ganti dengan URL ikon asli -->
+                         <!-- Menggunakan tag img lazy load untuk aplikasi lain -->
                         <img data-src="https://via.placeholder.com/80/2196F3/FFFFFF?text=W" alt="Ikon WallArt HD" class="lazy">
                         <h3>WallArt HD</h3>
                         <p>Ribuan wallpaper berkualitas tinggi untuk membuat tampilan HP lebih menarik.</p>
@@ -356,7 +388,7 @@
 
                 <div class="app-card" data-category="produktivitas">
                     <div class="card-content">
-                         <!-- Placeholder, ganti dengan URL ikon asli -->
+                         <!-- Menggunakan tag img lazy load untuk aplikasi lain -->
                         <img data-src="https://via.placeholder.com/80/FF9800/FFFFFF?text=N" alt="Ikon NoteQuick" class="lazy">
                         <h3>NoteQuick</h3>
                         <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
@@ -429,9 +461,9 @@
 
             <!-- RUANG IKLAN DI MODAL - KOSONG UNTUK SAAT INI KARENA DELAY 0 DETIK -->
             <!-- Kode Unit Iklan AdSense telah dipindahkan ke lokasi lain. -->
-            <!-- Jika nanti Anda ingin menambah delay & iklan di modal, tempelkan kodenya di dalam div ini. -->
+            <!-- Jika nanti Anda ingin menambah delay untuk menampilkan iklan, tempelkan kode unit iklan AdSense di dalam div ini. -->
             <div class="ads-container modal-ads-space" style="border: none; background: none; padding: 0; min-height: auto;">
-                 <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem;">(Ruang iklan tidak aktif dengan delay 0)</p>
+                 <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem;">(Ruang iklan di modal tidak aktif dengan delay 0)</p>
             </div>
             <!-- END RUANG IKLAN -->
 
@@ -460,7 +492,7 @@
     </footer>
 
 
-    <!-- JavaScript (Lengkap dengan fitur baru) -->
+    <!-- JavaScript (Lengkap dengan fitur baru: generate ikon & download logic) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Dark Mode
@@ -496,21 +528,17 @@
                 });
             });
 
-            // Lazy Loading Images
+            // Lazy Loading Images (Tetap aktif untuk img.lazy yang masih ada)
             const lazyImages = document.querySelectorAll('img.lazy');
             const lazyImageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src; // Load the image
-                        img.onload = () => {
-                           img.classList.add('loaded'); // Add 'loaded' class when done
-                        };
+                        img.onload = () => img.classList.add('loaded');
                          img.onerror = () => {
-                            // Optional: Handle image loading errors, e.g., set a fallback image
-                             console.error('Failed to load image:', img.dataset.src);
-                             // img.src = 'fallback-placeholder.png';
-                             img.classList.add('loaded'); // Still add loaded class to remove background placeholder
+                            console.error('Failed to load image:', img.dataset.src);
+                            img.classList.add('loaded'); // Tetap tambahkan loaded agar placeholder background hilang
                          };
                         lazyImageObserver.unobserve(img); // Stop observing once loaded
                     }
@@ -518,8 +546,27 @@
             });
             lazyImages.forEach(img => lazyImageObserver.observe(img));
 
+            // === Logic Generate Ikon ===
+            const generatedIconElements = document.querySelectorAll('.app-icon-generated');
 
-            // Filter & Search Logic
+            generatedIconElements.forEach(iconElement => {
+                const appId = iconElement.dataset.appId; // Ambil ID aplikasi dari data-attribute
+                let iconText = '';
+
+                // Tentukan teks ikon berdasarkan app ID
+                if (appId === 'tool-mtk-free') {
+                    iconText = 'TMF'; // Inisial Tool MTK Free
+                } else if (appId === 'praktisi-flash-tool-v2') {
+                    iconText = 'PFT'; // Inisial Praktisi Flash Tool v2
+                }
+                // Tambahkan kondisi lain di sini jika ada aplikasi lain yang ingin digenerate ikonnya
+
+                iconElement.textContent = iconText; // Masukkan teks ke dalam div
+            });
+            // =========================
+
+
+            // Filter & Search Logic (Tetap aktif)
             const filterButtons = document.querySelectorAll('.filter-btn');
             const searchInput = document.getElementById('searchInput');
             const appCards = document.querySelectorAll('.app-card');
@@ -532,7 +579,6 @@
                     const cardCategory = card.dataset.category;
                     const cardTitle = card.querySelector('h3').textContent.toLowerCase();
 
-                    // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
                     const searchMatch = cardTitle.includes(searchTerm);
 
@@ -544,41 +590,32 @@
                 });
             }
 
-            // Add event listeners for filter buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // Remove active class from all buttons
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to the clicked button
                     button.classList.add('active');
-                    // Apply filter and search
                     filterAndSearch();
                 });
             });
 
-            // Add event listener for search input
             searchInput.addEventListener('keyup', filterAndSearch);
 
-             // Initial filter/search on page load (shows 'all')
-             filterAndSearch(); // This ensures only 'all' are shown initially and applies any pre-filled search term
+             filterAndSearch(); // Initial filter/search on page load
         });
 
-        // Copy to Clipboard Function
+        // Copy to Clipboard Function (Tetap aktif)
         function copyToClipboard(text) {
-            // Use the modern Clipboard API if available
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
                     showToast('Nomor berhasil disalin!');
                 }).catch(err => {
                     console.error('Gagal menyalin: ', err);
-                    // Fallback for older browsers or failed copy
                     showToast('Gagal menyalin nomor.');
                 });
             } else {
-                // Fallback using document.execCommand (deprecated but widely supported)
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
-                textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+                textarea.style.position = 'fixed';
                 document.body.appendChild(textarea);
                 textarea.focus();
                 textarea.select();
@@ -593,29 +630,28 @@
             }
         }
 
-        // Function to show toast notification
+        // Function to show toast notification (Tetap aktif)
         function showToast(message) {
              const toast = document.getElementById('toast');
-             toast.textContent = message; // Set the message dynamically
+             toast.textContent = message;
              toast.classList.add('show');
              setTimeout(() => {
                 toast.classList.remove('show');
-             }, 2000); // Hide after 2 seconds
+             }, 2000);
         }
 
         // === Download Modal Logic (Revised for Instant Download & No Modal Ad) ===
         const downloadModalOverlay = document.getElementById('downloadModalOverlay');
         const downloadButtons = document.querySelectorAll('.download-btn');
-        let downloadTimer = null; // To keep track of the timer
+        let downloadTimer = null;
 
         downloadButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                event.preventDefault(); // Stop the default link behavior
+                event.preventDefault();
 
-                const downloadUrl = button.href; // Get the URL from the clicked button's href
-                const downloadTarget = button.target; // Get the target (e.g., _blank)
+                const downloadUrl = button.href;
+                const downloadTarget = button.target;
 
-                // Clear any existing timer to prevent multiple downloads
                 if (downloadTimer) {
                     clearTimeout(downloadTimer);
                 }
@@ -627,26 +663,23 @@
                 console.log("Modal shown with 0 delay. No AdSense push in modal.");
 
 
-                // 3. Set timer untuk memulai download dengan **delay sangat singkat (0ms)**
-                // Ini akan menjalankan kode download segera setelah browser siap,
-                // tapi masih memungkinkan modal muncul (walaupun sebentar sekali).
-                const delayBeforeDownload = 0; // Set delay to 0 milliseconds
+                // 2. Set timer untuk memulai download dengan **delay sangat singkat (0ms)**
+                const delayBeforeDownload = 0;
                 console.log(`Starting download timer (${delayBeforeDownload / 1000}s)...`);
 
                 downloadTimer = setTimeout(() => {
                     console.log("Download timer finished. Hiding modal and starting download.");
-                    // 4. Sembunyikan modal
+                    // 3. Sembunyikan modal
                     downloadModalOverlay.classList.remove('show');
 
-                    // 5. Mulai proses download (buka URL target)
-                    // Menggunakan window.open untuk konsistensi dengan target="_blank" link Google Drive
+                    // 4. Mulai proses download (buka URL target)
                     if (downloadTarget === '_blank') {
                          window.open(downloadUrl, '_blank');
                     } else {
                          window.location.href = downloadUrl;
                     }
 
-                    downloadTimer = null; // Reset timer ID
+                    downloadTimer = null;
 
                 }, delayBeforeDownload);
             });
@@ -658,18 +691,18 @@
         // Ini tetap aktif untuk unit iklan yang Anda tempatkan di luar modal.
          if (typeof adsbygoogle !== 'undefined') {
              console.log("Initial AdSense push for units outside modal.");
-             // Mengambil semua unit iklan yang bukan di dalam modal untuk inisialisasi awal
-             // Menggunakan querySelectorAll('.adsbygoogle') untuk mencakup semua unit iklan yang ada
+             // Mengambil semua unit iklan dengan class .adsbygoogle
              document.querySelectorAll('.adsbygoogle').forEach(adIns => {
-                  // Pastikan unit ini bukan yang di dalam modal jika modal punya .adsbygoogle di dalamnya,
-                  // tapi karena kita sudah mengosongkan modal, ini sudah aman.
-                  // Filter jika perlu: if (!adIns.closest('#downloadModalOverlay')) { ... }
-                 try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
-                 } catch (e) {
-                     console.error("Error pushing AdSense ad:", adIns.getAttribute('data-ad-slot'), e);
-                 }
+                  // Cek apakah unit ini ada di dalam modal, jika ya, jangan di-push di sini
+                  // (Karena kita sudah tidak menempatkan kode di modal, filter ini opsional tapi bagus)
+                  if (!adIns.closest('#downloadModalOverlay')) {
+                      try {
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                         // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
+                      } catch (e) {
+                          console.error("Error pushing AdSense ad:", adIns.getAttribute('data-ad-slot'), e);
+                      }
+                  }
              });
          } else {
              console.warn("adsbygoogle is not defined on load. Initial ads might not load.");
