@@ -544,7 +544,6 @@
 
                     // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
-                    // Check if title includes the search term
                     const searchMatch = cardTitle.includes(searchTerm);
 
                     if (categoryMatch && searchMatch) {
@@ -614,86 +613,90 @@
              }, 2000); // Hide after 2 seconds
         }
 
-        // === Download Modal Logic ===
+        // === Download Modal Logic (Revised) ===
         const downloadModalOverlay = document.getElementById('downloadModalOverlay');
         const downloadButtons = document.querySelectorAll('.download-btn');
+        let currentDownloadLink = null; // To store the link element that was clicked
 
         downloadButtons.forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault(); // Stop the default link behavior
 
-                const downloadUrl = button.href; // Get the URL from the clicked button's href
-                const downloadTarget = button.target; // Get the target (e.g., _blank)
+                // Store the clicked link element
+                currentDownloadLink = button;
 
                 // 1. Tampilkan modal
                 downloadModalOverlay.classList.add('show');
 
                 // 2. Coba muat iklan AdSense di dalam modal
-                // Kita panggil push() untuk semua unit iklan yang mungkin ada di dalam modal.
-                // Karena kita sudah menempelkan kode unit iklan di HTML di lokasi modal,
-                // push() akan menginstruksikan library AdSense untuk menampilkan iklan di elemen <ins> tersebut.
-                // Ini perlu dilakukan setiap kali modal ditampilkan karena elemen <ins> mungkin belum terlihat sebelumnya.
+                // Ini akan mencoba memuat unit iklan yang ada di dalam modal
                 if (typeof adsbygoogle !== 'undefined') {
                      downloadModalOverlay.querySelectorAll('.adsbygoogle').forEach(adIns => {
                          try {
-                            // Pastikan elemen ins terlihat atau dalam viewport untuk di-render oleh AdSense
-                            // Dalam kasus modal, begitu modal show, elemen ins jadi terlihat.
+                             // Memastikan elemen iklan sudah terlihat saat push dipanggil
                             (adsbygoogle = window.adsbygoogle || []).push({});
-                            console.log("AdSense push called for a modal ad unit.");
+                            console.log("AdSense push called for modal ad unit.");
                          } catch (e) {
                              console.error("Error pushing AdSense ad in modal:", e);
                          }
                      });
                 } else {
-                    console.warn("adsbygoogle is not defined. AdSense script might not be loaded yet.");
-                    // Jika script utama belum load, push tidak akan bekerja.
-                    // Anda bisa menambahkan jeda singkat dan mencoba lagi, tapi ini opsional.
+                    console.warn("adsbygoogle is not defined on modal show.");
                 }
-
 
                 // 3. Set timer untuk memulai download setelah beberapa detik
                 const delayBeforeDownload = 5000; // Tunggu 5 detik (ubah jika perlu)
                 console.log(`Starting download timer (${delayBeforeDownload / 1000}s)...`);
 
                 setTimeout(() => {
-                    console.log("Download timer finished. Hiding modal and starting download.");
+                    console.log("Download timer finished. Hiding modal and simulating click.");
                     // 4. Sembunyikan modal
                     downloadModalOverlay.classList.remove('show');
 
-                    // 5. Mulai proses download (buka URL target)
-                    // Karena linknya ke Google Drive View, ini akan membuka halaman view Google Drive
-                    if (downloadTarget === '_blank') {
-                         // Membuka di tab baru
-                         window.open(downloadUrl, '_blank');
+                    // 5. Simulasikan klik pada link asli
+                    // Ini lebih mirip perilaku klik pengguna langsung
+                    if (currentDownloadLink) {
+                        // Create a temporary link to avoid messing with the original event listener
+                        const tempLink = document.createElement('a');
+                        tempLink.href = currentDownloadLink.href; // Copy original href
+                        if (currentDownloadLink.target) {
+                            tempLink.target = currentDownloadLink.target; // Copy original target
+                        }
+                        if (currentDownloadLink.hasAttribute('download')) {
+                            tempLink.download = currentDownloadLink.getAttribute('download'); // Copy download attribute if exists
+                        }
+
+                        // Style to hide the temporary link
+                        tempLink.style.display = 'none';
+                        document.body.appendChild(tempLink); // Add to body to make it clickable
+
+                        // Simulate the click
+                        tempLink.click();
+
+                        // Clean up the temporary link
+                        document.body.removeChild(tempLink);
+
+                        console.log(`Simulated click for URL: ${currentDownloadLink.href}`);
+
                     } else {
-                         // Membuka di tab yang sama (bisa menyebabkan "back" jika browser menginterpretasikan history)
-                         window.location.href = downloadUrl;
-                         // Untuk link download file langsung, ini seringkali bekerja.
-                         // Untuk link view Google Drive, membuka di _blank lebih disarankan.
+                        console.error("No download link element found after timer!");
                     }
+
+                    // Reset the stored link
+                    currentDownloadLink = null;
 
                 }, delayBeforeDownload);
             });
         });
 
         // === Inisialisasi Unit Iklan Lain di Luar Modal ===
-        // Unit iklan di luar modal perlu diinisialisasi saat halaman pertama kali dimuat
-        // Kode utama AdSense sudah otomatis mencoba mencari elemen <ins class="adsbygoogle">
-        // di seluruh halaman setelah script utama dimuat.
-        // Namun, memanggil push({}) secara manual setelah DOMContentLoaded bisa membantu
-        // memastikan unit iklan yang sudah ada di HTML (di luar modal) dimuat.
-        // UNIT IKLAN DI DALAM GRID APLIKASI YANG AWALNYA HIDE KARENA FILTER AKAN MEMERLUKAN
-        // PUSH LAGI KETIKA FILTER/SEARCH MEMBUATNYA TERLIHAT.
-        // Logika filter/search kita saat ini tidak memanggil push() saat kartu ditampilkan.
-        // Ini adalah kompleksitas AdSense dengan konten yang dinamis/tersembunyi.
-        // Untuk sederhana, kita panggil push untuk SEMUA unit iklan di halaman saat DOMContentLoaded.
-        // Ini akan mencoba memuat unit yang sudah terlihat. Unit yang awalnya tersembunyi
-        // mungkin tidak langsung dimuat sampai terlihat, dan mungkin butuh push() ulang.
-
+        // Ini membantu AdSense memuat unit iklan yang sudah terlihat saat halaman dimuat.
          if (typeof adsbygoogle !== 'undefined') {
              console.log("Initial AdSense push for units outside modal.");
              // Mengambil semua unit iklan yang bukan di dalam modal untuk inisialisasi awal
-             document.querySelectorAll('.adsbygoogle:not(#downloadModalOverlay .adsbygoogle)').forEach(adIns => {
+             // Gunakan querySelectorAll('.adsbygoogle:not(.modal-ads-space .adsbygoogle)')
+             // agar lebih spesifik tidak memasukkan unit di modal
+             document.querySelectorAll('.adsbygoogle:not(.modal-ads-space .adsbygoogle)').forEach(adIns => {
                  try {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     // console.log("Pushed ad unit:", adIns.getAttribute('data-ad-slot'));
