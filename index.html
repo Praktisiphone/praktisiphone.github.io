@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praktisi Phone Blora - Aplikasi Android Terlengkap</title>
 
+    <!-- Google AdSense Script (Script utama) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5037441204470086"
+     crossorigin="anonymous"></script>
+    <!-- End Google AdSense Script -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZ7QVX3CPR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EZ7QVX3CPR');
+    </script>
+    <!-- End Google tag (gtag.js) -->
+
+
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,8 +122,6 @@
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
         .download-btn:hover { background-color: var(--primary-hover); }
 
-        /* FAQ Section (Dihapus kontennya) */
-
 
         /* Contact Section & Footer */
         .contact-section { background-color: var(--card-bg); text-align: center; padding: 3rem 2rem; border-radius: 15px; margin-top: 2rem;}
@@ -157,8 +172,6 @@
         .toast-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
         .toast-notification.show { opacity: 1; bottom: 40px; }
 
-        /* CSS for Dark Mode Toggle Slider (Dihapus elemennya, jadi aturan ini tidak relevan) */
-
          /* Untuk tampilan di layar yang lebih kecil, mungkin tumpuk tombol social */
          @media (max-width: 600px) {
             .floating-social-buttons {
@@ -169,6 +182,12 @@
             }
          }
 
+        /* Style untuk kontainer iklan display */
+        .adsbygoogle-container {
+             margin: 2rem auto; /* Atur margin atas/bawah dan tengahkan */
+             text-align: center; /* Tengahkan konten di dalamnya */
+             max-width: 728px; /* Atur lebar maksimal jika diperlukan */
+        }
 
     </style>
 </head>
@@ -186,6 +205,21 @@
             <h1>Aplikasi Android Pilihan dari Praktisi Phone Blora</h1>
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
+
+        <!-- === Google AdSense Display Ad Unit === -->
+        <div class="adsbygoogle-container">
+            <!-- praktisi phone blora -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5037441204470086"
+                 data-ad-slot="3677127727"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <!-- ===================================== -->
 
         <section id="app-list" class="section">
             <div class="filter-container">
@@ -309,7 +343,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Logika Dark Mode Dihapus untuk permanen mode terang
             const body = document.body;
-            // Semua kode terkait dark mode toggle di sini sudah dihapus.
 
             // Logika FAQ Accordion Dihapus
 
@@ -399,8 +432,6 @@
                 toast.classList.remove('show');
              }, 2000); // Hide after 2 seconds
         }
-
-        // Kode JavaScript terkait Dark Mode Toggle Slider sudah dihapus
 
     </script>
 </body>
