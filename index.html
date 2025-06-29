@@ -29,7 +29,7 @@
     <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru & Animasi Logo) -->
+    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru & Animasi Logo & Animasi Hero) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -55,47 +55,43 @@
 
         /* --- Animasi Logo PRAKTISIPHONE --- */
         @keyframes logoEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            /* Initial state for animation */
-            opacity: 0;
-            transform: translateY(-20px);
-            /* Apply animation */
-            animation: logoEntrance 0.8s ease-out forwards; /* 0.8s duration, ease-out timing, stay at final state */
-            cursor: default; /* Tidak perlu kursor pointer jika tidak bisa diklik */
-            transition: color 0.3s ease; /* Transisi warna untuk hover */
+            font-size: 1.5rem; font-weight: 700; color: var(--primary-color);
+            opacity: 0; transform: translateY(-20px); /* Initial state */
+            animation: logoEntrance 0.8s ease-out forwards;
+            cursor: default;
+            transition: color 0.3s ease;
         }
-        /* Efek saat kursor diarahkan (hover) */
-        .logo:hover {
-             color: var(--primary-hover); /* Ganti warna saat hover */
-        }
+        .logo:hover { color: var(--primary-hover); }
         .logo strong {
-             font-weight: 400;
-             color: var(--text-color);
-             /* Animasi delay untuk bagian 'PHONE' (opsional, bisa dihapus jika tidak mau delay) */
-             animation: logoEntrance 0.8s ease-out forwards 0.2s; /* Delay 0.2s */
-             opacity: 0; /* Initial state for delay animation */
-             transform: translateY(-20px); /* Initial state for delay animation */
+             font-weight: 400; color: var(--text-color);
+             animation: logoEntrance 0.8s ease-out forwards 0.2s; /* Delay */
+             opacity: 0; transform: translateY(-20px); /* Initial state */
         }
         /* --- End Animasi Logo --- */
 
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
 
-
+        /* --- Animasi Teks Hero --- */
+         @keyframes heroTextFadeInUp {
+             from { opacity: 0; transform: translateY(20px); }
+             to { opacity: 1; transform: translateY(0); }
+         }
         .hero { text-align: center; padding: 4rem 2rem; }
-        .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
-        .hero p { font-size: 1.1rem; max-width: 650px; margin: 0 auto 2rem auto; color: var(--text-secondary); }
+        .hero h1 {
+             font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem;
+             opacity: 0; transform: translateY(20px); /* Initial state */
+             animation: heroTextFadeInUp 1s ease-out forwards;
+         }
+        .hero p {
+             font-size: 1.1rem; max-width: 650px; margin: 0 auto 2rem auto; color: var(--text-secondary);
+             opacity: 0; transform: translateY(20px); /* Initial state */
+             animation: heroTextFadeInUp 1s ease-out forwards 0.5s; /* Delay */
+         }
+        /* --- End Animasi Teks Hero --- */
 
 
         .section { padding: 2rem 5% 4rem 5%; max-width: 1200px; margin: 0 auto; }
@@ -293,10 +289,17 @@
     </header>
 
     <main>
+        <!-- === Section Hero (Teks dan Animasi Baru) === -->
         <section class="hero">
-            <h1>Aplikasi Android Pilihan dari Praktisi Phone Blora</h1>
-            <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
+            <!-- Judul lebih menarik -->
+            <h1>Praktisi Phone Blora: Solusi Aplikasi Android Andal untuk Kebutuhan Anda.</h1>
+            <!-- Keterangan lebih menarik dan mengundang -->
+            <p>Temukan koleksi aplikasi Android pilihan yang Aman, Teruji, dan Mudah diunduh. Tingkatkan fungsionalitas HP Anda dengan solusi terbaik dari kami!</p>
+            <!-- Anda bisa pertimbangkan menambahkan tombol "Lihat Aplikasi" di sini jika mau -->
+            <!-- <a href="#app-list" class="download-btn" style="display: inline-block; width: auto; margin-top: 1.5rem;">Jelajahi Aplikasi <i class="fas fa-arrow-down"></i></a> -->
         </section>
+        <!-- ===================================== -->
+
 
         <!-- === Google AdSense Display Ad Unit === -->
         <div class="adsbygoogle-container">
