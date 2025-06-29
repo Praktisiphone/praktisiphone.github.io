@@ -39,7 +39,7 @@
     <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru & Animasi Logo & Animasi Hero) -->
+    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru & Animasi Logo & Animasi Hero & Layout List Aplikasi) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -115,24 +115,134 @@
         .filter-buttons button { padding: 10px 20px; border: none; border-radius: 50px; background-color: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: 600; transition: background-color 0.3s, color 0.3s;}
         .filter-buttons button.active { background-color: var(--primary-color); color: white; }
 
-        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .app-card { background-color: var(--card-bg); border-radius: 15px; box-shadow: 0 4px 20px var(--shadow-color); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; overflow: hidden; }
-        .app-card.hide { display: none; }
-        .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
-        .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
-
-        /* CSS untuk ikon Font Awesome di kartu aplikasi */
-        .app-card .card-content i.fas,
-        .app-card .card-content i.fab { /* Menambahkan fab karena ikon sosial ada yg fab */
-            font-size: 4rem; /* Ukuran ikon */
-            margin-bottom: 1rem; /* Jarak bawah seperti img */
-            align-self: center; /* Tengahkan ikon */
-            color: var(--primary-color); /* Warna ikon, bisa disesuaikan */
+        /* === Layout Aplikasi Berubah Menjadi Daftar Vertikal === */
+        .app-grid {
+            display: block; /* Tidak lagi grid */
+            gap: 0; /* Gap dihapus */
         }
-         body.dark-mode .app-card .card-content i.fas,
-         body.dark-mode .app-card .card-content i.fab { /* Aturan ini tetap ada tapi tidak akan diterapkan */
+        .app-card {
+             background-color: var(--card-bg);
+             border-radius: 10px; /* Border radius disesuaikan */
+             box-shadow: 0 2px 8px var(--shadow-color); /* Shadow lebih halus */
+             transition: transform 0.2s, box-shadow 0.2s; /* Transisi cepat */
+             display: flex; /* Flexbox untuk tata letak horizontal (ikon + konten) */
+             align-items: center; /* Pusatkan item secara vertikal */
+             padding: 1rem 1.5rem; /* Padding dalam kartu */
+             margin-bottom: 1rem; /* Jarak antar item dalam daftar */
+             overflow: hidden;
+             width: 100%; /* Memastikan kartu mengambil lebar penuh section */
+             box-sizing: border-box; /* Padding termasuk dalam lebar */
+        }
+         .app-card.hide { display: none; }
+        .app-card:hover {
+             transform: translateY(-3px); /* Efek hover ringan */
+             box-shadow: 0 4px 12px var(--shadow-color); /* Shadow saat hover */
+        }
+        /* CSS untuk ikon Font Awesome di kartu aplikasi (berada langsung di dalam .app-card) */
+        .app-card i.fas,
+        .app-card i.fab {
+            font-size: 2.5rem; /* Ukuran ikon */
+            margin-right: 1.5rem; /* Jarak kanan ikon dari teks */
+            margin-bottom: 0; /* Pastikan margin bawah 0 */
+            align-self: center; /* Pusatkan vertikal */
+            flex-shrink: 0; /* Ikon tidak mengecil jika ruang sempit */
+             color: var(--primary-color); /* Warna ikon */
+        }
+         body.dark-mode .app-card i.fas,
+         body.dark-mode .app-card i.fab {
              color: var(--primary-color); /* Warna ikon di dark mode */
          }
+
+        .card-content {
+             display: flex; /* Flexbox untuk konten (judul, deskripsi, info, tombol) */
+             flex-direction: column; /* Susun item dalam card-content secara vertikal */
+             flex-grow: 1; /* Biarkan card-content mengisi ruang yang tersisa */
+             text-align: left; /* Teks rata kiri */
+             padding: 0; /* Hapus padding default dari .card-content jika ada */
+             /* Jika ikon dipindah ke luar card-content, padding 1.5rem pindah ke .app-card */
+        }
+
+        /* Adjust layout inside card-content */
+        .app-card .card-content h3 {
+             margin-top: 0; /* Hapus margin atas default h3 */
+             margin-bottom: 0.3rem; /* Jarak bawah judul */
+             font-size: 1.2rem; /* Ukuran judul disesuaikan */
+        }
+        .app-card .card-content p {
+             margin-bottom: 0.8rem; /* Jarak bawah deskripsi */
+             font-size: 0.9em; /* Ukuran deskripsi disesuaikan */
+             color: var(--text-secondary);
+        }
+
+        .app-info {
+             display: flex; /* Tetap flex untuk info baris */
+             justify-content: flex-start; /* Info rata kiri */
+             gap: 1rem; /* Jarak antar item info */
+             font-size: 0.8rem; /* Ukuran teks info */
+             color: var(--text-secondary);
+             margin-bottom: 1rem; /* Jarak bawah info dari tombol */
+             border-top: 1px solid var(--border-color); /* Garis atas info */
+             padding-top: 0.8rem; /* Padding atas info */
+        }
+         .app-info span {
+             display: inline-flex; /* Agar ikon dan teks info sebaris */
+             align-items: center;
+             gap: 4px; /* Jarak ikon dan teks di info */
+         }
+          .app-info i {
+              font-size: 0.9em; /* Ukuran ikon di info */
+          }
+
+        .download-btn {
+             display: inline-block;
+             width: auto; /* Tombol tidak 100% di desktop */
+             background-color: var(--primary-color);
+             color: white;
+             padding: 8px 15px; /* Padding tombol disesuaikan */
+             border-radius: 6px; /* Border radius tombol disesuaikan */
+             text-decoration: none;
+             font-weight: 600;
+             transition: background-color 0.3s;
+             text-align: center; /* Teks tombol di tengah */
+             align-self: flex-start; /* Tombol di kiri dalam flex column */
+             font-size: 0.9em; /* Ukuran teks tombol */
+         }
+         .download-btn:hover { background-color: var(--primary-hover); }
+
+        /* Responsive untuk tampilan HP */
+        @media (max-width: 600px) {
+             .app-card {
+                 flex-direction: column; /* Tumpuk item: ikon, card-content */
+                 align-items: center; /* Pusatkan semua konten */
+                 padding: 1.5rem; /* Padding default */
+             }
+              /* CSS untuk ikon ketika di HP (di dalam app-card) */
+             .app-card i.fas,
+             .app-card i.fab {
+                  margin-right: 0; /* Hapus margin kanan */
+                  margin-bottom: 1rem; /* Beri jarak bawah */
+                  font-size: 3rem; /* Ukuran ikon kembali ke 3rem di HP */
+             }
+             .card-content {
+                 text-align: center; /* Teks di tengah */
+                 width: 100%; /* Mengambil lebar penuh */
+                 flex-grow: 0; /* Tidak perlu grow di sini */
+             }
+             .app-card .card-content h3 { margin-top: 0; } /* Hapus margin atas yg tadi ditambahkan */
+             .app-card .card-content p { margin-bottom: 1rem; }
+
+             .app-info {
+                 justify-content: center; /* Info di tengah */
+                 margin-bottom: 1.5rem;
+                 gap: 1rem;
+             }
+             .download-btn {
+                 width: 100%; /* Tombol 100% lebar di HP */
+                 align-self: stretch; /* Tombol mengambil lebar penuh container */
+             }
+        }
+        /* === Akhir Layout Aplikasi Berubah === */
+
 
         /* Style untuk section donasi */
         .donation-section {
@@ -371,17 +481,20 @@
             </div>
             <div class="filter-container filter-buttons">
                  <button class="filter-btn active" data-filter="all">Semua</button>
-                 <button class="filter-btn" data-filter="utilitas">Utilitas</button>
-                 <!-- Menghapus tombol filter Personalisasi -->
-                 <button class="filter-btn" data-filter="produktivitas">Produktivitas</button>
+                 <!-- Mengubah kategori filter sesuai yang ada di kartu -->
+                 <button class="filter-btn" data-filter="Tools">Tools</button>
+                 <button class="filter-btn" data-filter="Fimware">Firmware</button>
+                 <!-- Kategori Produktivitas dihapus jika tidak ada lagi aplikasi di dalamnya -->
+                 <!-- <button class="filter-btn" data-filter="produktivitas">Produktivitas</button> -->
             </div>
 
             <div class="app-grid">
 
-                <!-- === KARTU APLIKASI: TOOL MTK FREE === -->
-                <div class="app-card" data-category="utilitas">
+                <!-- === KARTU APLIKASI: TOOL MTK FREE (LAYOUT LIST) === -->
+                <div class="app-card" data-category="Tools">
+                    <!-- Ikon dipindahkan ke luar card-content untuk flexbox layout -->
+                     <i class="fas fa-tools"></i>
                     <div class="card-content">
-                        <i class="fas fa-tools"></i>
                         <h3>Tool MTK Free</h3>
                         <p>Aplikasi khusus untuk teknisi. Alat bantu serbaguna untuk menangani perangkat dengan chipset MediaTek (MTK).</p>
                         <div class="app-info">
@@ -395,10 +508,11 @@
                 </div>
                 <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: PRAKTISI FLASHTOOL === -->
-                <div class="app-card" data-category="utilitas">
+                <!-- === KARTU APLIKASI: PRAKTISI FLASHTOOL (LAYOUT LIST) === -->
+                <div class="app-card" data-category="Tools">
+                     <!-- Ikon dipindahkan ke luar card-content -->
+                     <i class="fas fa-terminal"></i>
                     <div class="card-content">
-                        <i class="fas fa-terminal"></i>
                         <h3>Praktisi FlashTool</h3>
                         <p>Alat esensial untuk flashing firmware, perbaikan software, dan debugging perangkat Android.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> ~30 MB</span><span><i class="fas fa-code-branch"></i> 1.0</span></div>
@@ -407,11 +521,12 @@
                 </div>
                  <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE (KASIR CUCIAN - Aplikasi Komputer) === -->
-                <div class="app-card" data-category="produktivitas">
+                <!-- === KARTU APLIKASI: APLIKASI CUCIAN.EXE (KASIR CUCIAN - Aplikasi Komputer - LAYOUT LIST) === -->
+                <div class="app-card" data-category="Tools">
+                     <!-- Ikon dipindahkan ke luar card-content -->
+                     <i class="fas fa-soap"></i>
                     <div class="card-content">
-                         <i class="fas fa-soap"></i>
-                        <h3>aplikasi cucian.exe</h3>
+                         <h3>aplikasi cucian.exe</h3>
                         <p>Aplikasi kasir ringan untuk komputer. Praktis untuk mencatat transaksi usaha cuci motor/mobil UMKM Anda.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> 25 MB</span><span><i class="fas fa-code-branch"></i> 1.5.2</span></div>
                         <a href="https://drive.google.com/uc?export=download&id=1DglY2oTA_B1uT4HbehCEoOjWwYkuP3Y2" target="_blank" class="download-btn">
@@ -421,10 +536,11 @@
                 </div>
                 <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: PRAKTISI FLASH PRO TERBARU === -->
-                <div class="app-card" data-category="utilitas">
+                <!-- === KARTU APLIKASI: PRAKTISI FLASH PRO TERBARU (LAYOUT LIST) === -->
+                <div class="app-card" data-category="Tools">
+                     <!-- Ikon dipindahkan ke luar card-content -->
+                     <i class="fas fa-bolt"></i>
                     <div class="card-content">
-                         <i class="fas fa-bolt"></i>
                         <h3>Praktisi Flash Pro Terbaru</h3>
                         <p>Versi terbaru alat profesional untuk flashing, unlock, perbaikan software, dan debugging HP Android.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div>
@@ -433,6 +549,19 @@
                 </div>
                 <!-- ===================================== -->
 
+                <!-- === KARTU APLIKASI: file fix sensor redmi not 9 (LAYOUT LIST) === -->
+                <div class="app-card" data-category="Firmware"> <!-- Memperbaiki typo Firmware -->
+                     <!-- Ikon dipindahkan ke luar card-content -->
+                     <i class="fas fa-bolt"></i>
+                    <div class="card-content">
+                        <h3>file fix sensor redmi not 9</h3>
+                        <p> file untuk fix sensor yang mengalami gagal flashing atau cusroom .</p>
+                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div>
+                        <a href="https://drive.google.com/file/d/1Zj1xqW3U5WsHIDRHzRYcixO25Ne8eKG1/view?usp=drive_link" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                    </div>
+                </div>
+                <!-- ===================================== -->
+				
             </div>
         </section>
 
@@ -440,8 +569,8 @@
         <section class="section faq-section">
             <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
             <div class="faq-item">
-                <div class="faq-question"><span>Apakah tool ini aman untuk PC saya?</span><i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Ya. Semua tool yang kami sediakan telah melalui pengujian dasar oleh tim kami. Namun, sebaiknya selalu jalankan file .exe dari sumber terpercaya dan pertimbangkan menggunakan antivirus.</p></div>
+                <div class="faq-question"><span>bagaimana jika file berpasword?</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p> ada beberapa file yang berpasword untuk mendapatkan paswordnya hubungi WhatsApp dibawah bertanya lebih baik.</p></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question"><span>Bagaimana cara menginstal atau menjalankan file .exe ini?</span><i class="fas fa-chevron-down"></i></div>
