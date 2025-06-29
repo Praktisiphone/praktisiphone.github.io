@@ -182,6 +182,46 @@
              background-color: var(--primary-hover);
          }
 
+        /* Style untuk section FAQ (Diaktifkan kembali) */
+        .faq-section {
+             /* Menggunakan style dasar section */
+        }
+        .faq-item {
+             background: var(--card-bg);
+             border-radius: 10px;
+             margin-bottom: 1rem;
+             overflow: hidden; /* Penting agar answer tersembunyi saat max-height 0 */
+        }
+        .faq-question {
+             padding: 1rem;
+             font-weight: 600;
+             cursor: pointer;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             transition: background-color 0.3s ease; /* Transisi warna latar saat aktif */
+        }
+        .faq-item.active .faq-question {
+             background-color: var(--bg-color); /* Warna latar beda saat aktif */
+        }
+        .faq-answer {
+             padding: 0 1rem; /* Padding horizontal saja awalnya */
+             max-height: 0;
+             overflow: hidden;
+             transition: max-height 0.3s ease-out, padding-top 0.3s ease-out, padding-bottom 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer {
+             max-height: 300px; /* Tinggikan agar konten terlihat. Sesuaikan jika konten sangat panjang */
+             padding-top: 0.5rem;
+             padding-bottom: 1rem;
+        }
+        .faq-question .fas {
+             transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-question .fa-chevron-down {
+             transform: rotate(180deg);
+        }
+
 
         /* Style untuk section diskusi online */
         .discussion-section {
@@ -396,6 +436,30 @@
             </div>
         </section>
 
+        <!-- === SECTION PERTANYAAN UMUM (FAQ) - Diaktifkan Kembali === -->
+        <section class="section faq-section">
+            <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-question"><span>Apakah tool ini aman untuk PC saya?</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Ya. Semua tool yang kami sediakan telah melalui pengujian dasar oleh tim kami. Namun, sebaiknya selalu jalankan file .exe dari sumber terpercaya dan pertimbangkan menggunakan antivirus.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><span>Bagaimana cara menginstal atau menjalankan file .exe ini?</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Anda cukup mengklik dua kali file .exe yang sudah diunduh, lalu ikuti petunjuk pada layar instalasi (jika ada) atau tool akan langsung berjalan. Pastikan Anda memiliki izin administrator jika diperlukan.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><span>Apakah saya perlu menginstal driver khusus untuk perbaikan HP?</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Ya, untuk tool perbaikan HP (seperti flash tool atau unlock tool), seringkali Anda memerlukan driver spesifik untuk ponsel yang ingin diperbaiki (misalnya, driver MediaTek, Qualcomm, Samsung, dll.). Tanpa driver yang tepat, tool mungkin tidak dapat mendeteksi perangkat Anda.</p></div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question"><span>Apakah semua tool di sini gratis?</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Silakan periksa deskripsi di setiap kartu aplikasi. Sebagian besar tool yang umum digunakan adalah gratis, namun ada kemungkinan beberapa tool premium atau yang memerlukan lisensi yang mungkin terdaftar di sini.</p></div>
+            </div>
+             <!-- Tambahkan lebih banyak FAQ di sini jika ada -->
+        </section>
+         <!-- ===================================== -->
+
+
         <!-- === SECTION DUKUNG KAMI LEWAT DONASI (SHOPEEPAY ONLY) === -->
         <section class="section donation-section">
             <h2 class="section-title">Dukung Kami Lewat Donasi</h2>
@@ -471,7 +535,22 @@
             // Logika Dark Mode Dihapus untuk permanen mode terang
             const body = document.body;
 
-            // Logika FAQ Accordion Dihapus
+            // === Logika FAQ Accordion Diaktifkan Kembali ===
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.querySelector('.faq-question').addEventListener('click', () => {
+                    // Close other open items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            // --- End Logika FAQ Accordion ---
+
 
             // Lazy Loading is no longer needed as icons are Font Awesome
 
