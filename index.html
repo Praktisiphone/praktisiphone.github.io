@@ -128,6 +128,55 @@
              color: var(--primary-color); /* Warna ikon di dark mode */
          }
 
+        /* Style untuk section donasi */
+        .donation-section {
+             text-align: center;
+             background-color: var(--card-bg);
+             padding: 2rem;
+             border-radius: 15px;
+             margin-top: 2rem;
+        }
+        .donation-section p {
+             margin-bottom: 1rem;
+             color: var(--text-secondary);
+        }
+        .donation-info {
+             margin-top: 1.5rem;
+             padding: 1.5rem;
+             background-color: var(--bg-color);
+             border-radius: 10px;
+             display: inline-block; /* Agar background sesuai konten */
+             text-align: left; /* Info transfer lebih baik rata kiri */
+             max-width: 400px; /* Batasi lebar info transfer */
+             margin: 1.5rem auto; /* Tengahkan info block */
+             border: 1px solid var(--border-color);
+        }
+         .donation-info strong {
+             display: block; /* Judul (misal Nama Bank) di baris baru */
+             margin-bottom: 0.5rem;
+             color: var(--text-color);
+         }
+         .donation-info p {
+             margin-bottom: 0.5rem;
+             color: var(--text-secondary);
+             font-size: 0.95em;
+         }
+         .donation-link-btn {
+             display: inline-block;
+             background-color: var(--primary-color);
+             color: white;
+             padding: 10px 20px;
+             border-radius: 8px;
+             text-decoration: none;
+             font-weight: 600;
+             transition: background-color 0.3s;
+             margin-top: 1rem;
+         }
+         .donation-link-btn:hover {
+             background-color: var(--primary-hover);
+         }
+
+
         /* Style untuk section diskusi online */
         .discussion-section {
             text-align: center;
@@ -249,8 +298,6 @@
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
 
-        <!-- Bagian "Tentang Praktisi Phone Blora" dihapus -->
-
         <!-- === Google AdSense Display Ad Unit === -->
         <div class="adsbygoogle-container">
             <!-- praktisi phone blora -->
@@ -339,6 +386,31 @@
 
             </div>
         </section>
+
+        <!-- === SECTION DUKUNG KAMI LEWAT DONASI (SHOPEEPAY ONLY) === -->
+        <section class="section donation-section">
+            <h2 class="section-title">Dukung Kami Lewat Donasi</h2>
+            <p>Jika Anda merasa aplikasi atau informasi yang kami berikan bermanfaat, Anda bisa memberikan dukungan untuk operasional dan pengembangan kami.</p>
+
+            <!-- Informasi Donasi - SHOPEEPAY -->
+            <div class="donation-info">
+                <p>Anda dapat berdonasi melalui:</p>
+                <p style="font-size: 1.1em; font-weight: 600; color: var(--primary-color);">
+                    ShopeePay<br>
+                    Nomor HP: <span style="color: var(--text-color);">085870163207</span>
+                </p>
+                <!-- Jika Anda memiliki gambar QRIS ShopeePay, bisa tambahkan tag img di sini -->
+                <!-- <img src="LINK_GAMBAR_QRIS_ANDA" alt="QRIS ShopeePay Donasi" style="max-width: 180px; display: block; margin: 15px auto;"> -->
+
+                <p style="margin-top: 1.5rem; font-size: 0.95em;">Terima kasih banyak atas setiap dukungan yang diberikan!</p>
+                <p style="font-size: 0.95em;">Jika ada pertanyaan atau kendala, hubungi kami:</p>
+                 <a href="https://wa.me/6285870163207?text=Halo%20Praktisi%20Phone%2C%20saya%20ingin%20bertanya%20tentang%20donasi%20via%20ShopeePay." target="_blank" class="donation-link-btn" style="background-color: var(--whatsapp-color);"><i class="fab fa-whatsapp"></i> Hubungi via WA</a>
+            </div>
+             <!-- AKHIR INFORMASI DONASI -->
+
+        </section>
+        <!-- ===================================== -->
+
 
         <!-- === SECTION DISKUSI ONLINE === -->
         <section class="section discussion-section">
@@ -440,7 +512,7 @@
              filterAndSearch(); // This ensures only 'all' are shown initially and applies any pre-filled search term
         });
 
-        // Copy to Clipboard Function
+        // Copy to Clipboard Function (Sudah ada dan bisa digunakan)
         function copyToClipboard(text) {
             // Use the modern Clipboard API if available
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -470,7 +542,7 @@
             }
         }
 
-        // Function to show toast notification
+        // Function to show toast notification (Sudah ada)
         function showToast(message) {
              const toast = document.getElementById('toast');
              toast.textContent = message; // Set the message dynamically
