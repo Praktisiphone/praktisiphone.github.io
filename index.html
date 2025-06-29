@@ -78,13 +78,15 @@
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
 
         /* CSS untuk ikon Font Awesome */
-        .app-card .card-content i.fas {
+        .app-card .card-content i.fas,
+        .app-card .card-content i.fab { /* Menambahkan fab karena ikon sosial ada yg fab */
             font-size: 4rem; /* Ukuran ikon */
             margin-bottom: 1rem; /* Jarak bawah seperti img */
             align-self: center; /* Tengahkan ikon */
             color: var(--primary-color); /* Warna ikon, bisa disesuaikan */
         }
-         body.dark-mode .app-card .card-content i.fas { /* Aturan ini tetap ada tapi tidak akan diterapkan */
+         body.dark-mode .app-card .card-content i.fas,
+         body.dark-mode .app-card .card-content i.fab { /* Aturan ini tetap ada tapi tidak akan diterapkan */
              color: var(--primary-color); /* Warna ikon di dark mode */
          }
 
@@ -121,7 +123,6 @@
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
         .download-btn:hover { background-color: var(--primary-hover); }
-
 
         /* Contact Section & Footer */
         .contact-section { background-color: var(--card-bg); text-align: center; padding: 3rem 2rem; border-radius: 15px; margin-top: 2rem;}
@@ -280,14 +281,16 @@
                 </div>
                 <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: NOTEQUICK === -->
-                <div class="app-card" data-category="produktivitas">
+                <!-- === KARTU APLIKASI: PRAKTISI FLASH PRO TERBARU (PREVIOUSLY NOTEQUICK - EDITED) === -->
+                <div class="app-card" data-category="utilitas"> <!-- Mengubah kategori ke utilitas -->
                     <div class="card-content">
-                         <i class="fas fa-sticky-note"></i>
-                        <h3>NoteQuick</h3>
-                        <p>Catat ide-ide brilian Anda dengan cepat dan mudah. Sinkronisasi antar perangkat.</p>
-                        <div class="app-info"><span><i class="fas fa-file-archive"></i> 10 MB</span><span><i class="fas fa-code-branch"></i> 3.0.1</span></div>
-                        <a href="#" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                         <i class="fas fa-bolt"></i> <!-- Ikon diubah ke bolt -->
+                        <h3>Praktisi Flash Pro Terbaru</h3> <!-- Judul diubah -->
+                        <!-- Keterangan diubah menjelaskan fungsi flash tool terbaru -->
+                        <p>Versi terbaru alat profesional untuk flashing, unlock, perbaikan software, dan debugging HP Android.</p> <!-- Keterangan disesuaikan -->
+                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div> <!-- Estimasi ukuran & versi -->
+                         <!-- Tombol dan link diubah kembali ke unduh langsung -->
+                        <a href="https://drive.google.com/uc?export=download&id=1mjqj_3bUMmq8p2MMmPMN-qQXaBshqb56" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a> <!-- Link unduh baru, warna default -->
                     </div>
                 </div>
                 <!-- ===================================== -->
@@ -359,7 +362,8 @@
 
                 appCards.forEach(card => {
                     const cardCategory = card.dataset.category;
-                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                    const cardTitleElement = card.querySelector('h3'); // Ambil elemen h3
+                    const cardTitle = cardTitleElement.textContent.toLowerCase(); // Ambil teks dari h3
 
                     // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
