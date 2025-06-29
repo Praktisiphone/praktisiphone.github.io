@@ -29,7 +29,7 @@
     <!-- Font Awesome sudah ada -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru) -->
+    <!-- CSS (Hanya mode terang permanen & Tombol Mengambang Baru & Animasi Logo) -->
     <style>
         :root {
             --primary-color: #007BFF; --primary-hover: #0056b3; --success-color: #28a745; --whatsapp-color: #25D366;
@@ -52,13 +52,51 @@
         }
         /* Aturan dark mode untuk header tetap ada */
         body.dark-mode header { background: rgba(36, 37, 38, 0.8); }
+
+        /* --- Animasi Logo PRAKTISIPHONE --- */
+        @keyframes logoEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            /* Initial state for animation */
+            opacity: 0;
+            transform: translateY(-20px);
+            /* Apply animation */
+            animation: logoEntrance 0.8s ease-out forwards; /* 0.8s duration, ease-out timing, stay at final state */
+            cursor: default; /* Tidak perlu kursor pointer jika tidak bisa diklik */
+            transition: color 0.3s ease; /* Transisi warna untuk hover */
+        }
+        /* Efek saat kursor diarahkan (hover) */
+        .logo:hover {
+             color: var(--primary-hover); /* Ganti warna saat hover */
+        }
+        .logo strong {
+             font-weight: 400;
+             color: var(--text-color);
+             /* Animasi delay untuk bagian 'PHONE' (opsional, bisa dihapus jika tidak mau delay) */
+             animation: logoEntrance 0.8s ease-out forwards 0.2s; /* Delay 0.2s */
+             opacity: 0; /* Initial state for delay animation */
+             transform: translateY(-20px); /* Initial state for delay animation */
+        }
+        /* --- End Animasi Logo --- */
+
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
-        .logo strong { font-weight: 400; color: var(--text-color); }
+
 
         .hero { text-align: center; padding: 4rem 2rem; }
         .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
         .hero p { font-size: 1.1rem; max-width: 650px; margin: 0 auto 2rem auto; color: var(--text-secondary); }
+
 
         .section { padding: 2rem 5% 4rem 5%; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; font-weight: 700; }
@@ -77,7 +115,7 @@
         .app-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow-color); }
         .card-content { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
 
-        /* CSS untuk ikon Font Awesome */
+        /* CSS untuk ikon Font Awesome di kartu aplikasi */
         .app-card .card-content i.fas,
         .app-card .card-content i.fab { /* Menambahkan fab karena ikon sosial ada yg fab */
             font-size: 4rem; /* Ukuran ikon */
@@ -123,6 +161,7 @@
         .app-info { display: flex; justify-content: space-around; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
         .download-btn { display: inline-block; width: 100%; background-color: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
         .download-btn:hover { background-color: var(--primary-hover); }
+
 
         /* Contact Section & Footer */
         .contact-section { background-color: var(--card-bg); text-align: center; padding: 3rem 2rem; border-radius: 15px; margin-top: 2rem;}
@@ -196,7 +235,10 @@
 
     <header>
         <nav>
+            <!-- === Logo PRAKTISIPHONE dengan Animasi === -->
             <div class="logo">PRAKTISI<strong>PHONE</strong></div>
+            <!-- ===================================== -->
+
             <!-- Tombol Dark Mode Dihapus -->
         </nav>
     </header>
@@ -206,6 +248,8 @@
             <h1>Aplikasi Android Pilihan dari Praktisi Phone Blora</h1>
             <p>Aman, gratis, dan teruji. Temukan aplikasi yang Anda butuhkan, unduh, dan install dengan mudah.</p>
         </section>
+
+        <!-- Bagian "Tentang Praktisi Phone Blora" dihapus -->
 
         <!-- === Google AdSense Display Ad Unit === -->
         <div class="adsbygoogle-container">
@@ -281,16 +325,14 @@
                 </div>
                 <!-- ===================================== -->
 
-                <!-- === KARTU APLIKASI: PRAKTISI FLASH PRO TERBARU (PREVIOUSLY NOTEQUICK - EDITED) === -->
-                <div class="app-card" data-category="utilitas"> <!-- Mengubah kategori ke utilitas -->
+                <!-- === KARTU APLIKASI: PRAKTISI FLASH PRO TERBARU === -->
+                <div class="app-card" data-category="utilitas">
                     <div class="card-content">
-                         <i class="fas fa-bolt"></i> <!-- Ikon diubah ke bolt -->
-                        <h3>Praktisi Flash Pro Terbaru</h3> <!-- Judul diubah -->
-                        <!-- Keterangan diubah menjelaskan fungsi flash tool terbaru -->
-                        <p>Versi terbaru alat profesional untuk flashing, unlock, perbaikan software, dan debugging HP Android.</p> <!-- Keterangan disesuaikan -->
-                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div> <!-- Estimasi ukuran & versi -->
-                         <!-- Tombol dan link diubah kembali ke unduh langsung -->
-                        <a href="https://drive.google.com/uc?export=download&id=1mjqj_3bUMmq8p2MMmPMN-qQXaBshqb56" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a> <!-- Link unduh baru, warna default -->
+                         <i class="fas fa-bolt"></i>
+                        <h3>Praktisi Flash Pro Terbaru</h3>
+                        <p>Versi terbaru alat profesional untuk flashing, unlock, perbaikan software, dan debugging HP Android.</p>
+                        <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div>
+                        <a href="https://drive.google.com/uc?export=download&id=1mjqj_3bUMmq8p2MMmPMN-qQXaBshqb56" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
                     </div>
                 </div>
                 <!-- ===================================== -->
@@ -364,6 +406,7 @@
                     const cardCategory = card.dataset.category;
                     const cardTitleElement = card.querySelector('h3'); // Ambil elemen h3
                     const cardTitle = cardTitleElement.textContent.toLowerCase(); // Ambil teks dari h3
+
 
                     // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
