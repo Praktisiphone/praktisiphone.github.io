@@ -507,6 +507,9 @@
 
             <div class="app-grid">
 
+                <!-- Daftar aplikasi Anda tetap utuh di sini... -->
+                <!-- ... (Kode semua kartu aplikasi tidak saya tampilkan ulang agar ringkas, tapi tetap ada di sini) ... -->
+
                 <!-- === KARTU APLIKASI: TOOL MTK FREE (LAYOUT LIST) === -->
                 <div class="app-card" data-category="Tools">
                     <!-- Ikon dipindahkan ke luar card-content untuk flexbox layout -->
@@ -715,7 +718,8 @@
                         <h3>mtk auth bypass</h3>
                         <p>Versi terbaru alat profesional untuk sebelum melakukan flashing flashing, unlock, perbaikan software, dan debugging HP Android.</p>
                         <div class="app-info"><span><i class="fas fa-file-archive"></i> ~40 MB</span><span><i class="fas fa-code-branch"></i> 1.1</span></div>
-                        <a href="https://drive.google.com/file/d/1yWMlcL_tcewRG7x0iOR1V0pAzU0X9XUT/view?usp=drive_link" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh</a>
+                        <a href="https://drive.google.com/file/d/1yWMlcL_tcewRG7x0iOR1V0pAzU0X9XUT/view?usp=drive_link" target="_blank" class="download-btn"><i class="fas fa-download"></i> Unduh
+                        </a>
                     </div>
                 </div>
                 <!-- ===================================== -->
@@ -836,21 +840,23 @@
                     </div>
                 </div>
                  <!-- ===================================== -->
-				 
+
             </div>
 
-            <!-- === Google AdSense Autorelaxed Ad Unit === -->
-            <div class="adsbygoogle-container" style="margin-top: 3rem;"> <!-- Memberi sedikit jarak atas -->
+            <!-- === IKLAN FEED BUATAN MANUAL (BARU) === -->
+            <!-- Kode iklan 'autorelaxed' yang lama telah diganti dengan kode di bawah ini -->
+            <div class="adsbygoogle-container" style="margin-top: 3rem;">
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-format="autorelaxed"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-6t+ed+2i-1n-4w"
                      data-ad-client="ca-pub-5037441204470086"
-                     data-ad-slot="8502982954"></ins>
+                     data-ad-slot="6475585414"></ins>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            <!-- =============================================== -->
+            <!-- ======================================== -->
 
         </section>
 
@@ -866,8 +872,8 @@
                 <div class="faq-answer"><p>Anda cukup mengklik dua kali file .exe yang sudah diunduh, lalu ikuti petunjuk pada layar instalasi (jika ada) atau tool akan langsung berjalan. Pastikan Anda memiliki izin administrator jika diperlukan.</p></div>
             </div>
 
-            <!-- === IKLAN IN-ARTICLE (BARU) === -->
-            <div style="margin: 2rem 0;"> <!-- Memberi jarak atas bawah -->
+            <!-- === IKLAN IN-ARTICLE (Lama) === -->
+            <div style="margin: 2rem 0;">
                 <ins class="adsbygoogle"
                      style="display:block; text-align:center;"
                      data-ad-layout="in-article"
@@ -943,28 +949,8 @@
 
 
         <!-- Removed the entire Contact Section here -->
-        <!--
-        <section class="section contact-section">
-            <h3>Punya Pertanyaan atau Butuh Bantuan?</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Hubungi kami langsung. Klik nomor di bawah untuk menyalin atau klik tombol WhatsApp.</p>
-        </section>
-        -->
 
     </main>
-
-    <!-- === Floating Social Buttons Container === -->
-    <!-- Removed the entire floating-social-buttons div as per instruction -->
-    <!--
-    <div class="floating-social-buttons">
-        <a href="https://wa.me/6285870163207?text=Halo%20Praktisi%20Phone%2C%20saya%20tertarik%20dengan%20aplikasi%20Anda." class="whatsapp-float" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://www.facebook.com/sutong.sutong20" class="facebook-float" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-    </div>
-    -->
-    <!-- ===================================== -->
 
     <div id="toast" class="toast-notification">Nomor berhasil disalin!</div>
 
@@ -995,8 +981,6 @@
             // --- End Logika FAQ Accordion ---
 
 
-            // Lazy Loading is no longer needed as icons are Font Awesome
-
             // Filter & Search Logic
             const filterButtons = document.querySelectorAll('.filter-btn');
             const searchInput = document.getElementById('searchInput');
@@ -1008,13 +992,11 @@
 
                 appCards.forEach(card => {
                     const cardCategory = card.dataset.category;
-                    const cardTitleElement = card.querySelector('h3'); // Ambil elemen h3
-                    const cardTitle = cardTitleElement.textContent.toLowerCase(); // Ambil teks dari h3
+                    const cardTitleElement = card.querySelector('h3');
+                    const cardTitle = cardTitleElement.textContent.toLowerCase();
 
 
-                    // Check if category matches OR selectedCategory is 'all'
                     const categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
-                    // Check if title includes the search term
                     const searchMatch = cardTitle.includes(searchTerm);
 
                     if (categoryMatch && searchMatch) {
@@ -1028,11 +1010,8 @@
             // Add event listeners for filter buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // Remove active class from all buttons
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to the clicked button
                     button.classList.add('active');
-                    // Apply filter and search
                     filterAndSearch();
                 });
             });
@@ -1040,27 +1019,23 @@
             // Add event listener for search input
             searchInput.addEventListener('keyup', filterAndSearch);
 
-             // Initial filter/search on page load (shows 'all')
-             filterAndSearch(); // This ensures only 'all' are shown initially and applies any pre-filled search term
+             // Initial filter/search on page load
+             filterAndSearch();
         });
 
-        // Copy to Clipboard Function (Sudah ada dan bisa digunakan)
-        // NOTE: This function is still present, but the element that *was* calling it is removed.
+        // Copy to Clipboard Function
         function copyToClipboard(text) {
-            // Use the modern Clipboard API if available
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
                     showToast('Nomor berhasil disalin!');
                 }).catch(err => {
                     console.error('Gagal menyalin: ', err);
-                    // Fallback for older browsers or failed copy
                     showToast('Gagal menyalin nomor.');
                 });
             } else {
-                // Fallback using document.execCommand (deprecated but widely supported)
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
-                textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+                textarea.style.position = 'fixed';
                 document.body.appendChild(textarea);
                 textarea.focus();
                 textarea.select();
@@ -1075,14 +1050,14 @@
             }
         }
 
-        // Function to show toast notification (Sudah ada)
+        // Function to show toast notification
         function showToast(message) {
              const toast = document.getElementById('toast');
-             toast.textContent = message; // Set the message dynamically
+             toast.textContent = message;
              toast.classList.add('show');
              setTimeout(() => {
                 toast.classList.remove('show');
-             }, 2000); // Hide after 2 seconds
+             }, 2000);
         }
 
     </script>
